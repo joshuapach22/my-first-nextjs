@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes float-left {
+  0%, 100% { transform: translateY(0px) rotate(-6deg); }
+  50%       { transform: translateY(-14px) rotate(-6deg); }
+}
+@keyframes float-right {
+  0%, 100% { transform: translateY(0px) rotate(6deg); }
+  50%       { transform: translateY(-20px) rotate(6deg); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ── Phone mockup responsive scaling ─────── */
+.phone-left  { animation: float-left  5s ease-in-out infinite; }
+.phone-right { animation: float-right 5s ease-in-out infinite 1s; }
+
+.scale-phone { display: contents; }
+
+.animate-fade-up-1 { animation: fade-up 0.7s ease-out 0.0s  both; }
+.animate-fade-up-2 { animation: fade-up 0.7s ease-out 0.12s both; }
+.animate-fade-up-3 { animation: fade-up 0.7s ease-out 0.24s both; }
+.animate-fade-up-4 { animation: fade-up 0.7s ease-out 0.36s both; }
+
+.glow-blob { animation: glow-pulse 4s ease-in-out infinite; }
