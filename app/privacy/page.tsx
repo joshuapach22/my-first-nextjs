@@ -81,7 +81,7 @@ export default function PrivacyPage() {
         <Section title="2. Information We Collect">
           <P><strong style={{ color: "#fff" }}>Information you provide directly:</strong></P>
           <UL items={[
-            "Account details: name, email address, phone number, and password",
+            "Account details: name, email address, and password",
             "Profile information: photo, job title, brokerage, license number, bio, and location",
             "Content you post: listings, photos, videos, comments, polls, messages, and community posts",
             "Communications: messages sent through the app's inbox and any support requests you submit",
@@ -172,13 +172,13 @@ export default function PrivacyPage() {
             "Location: Revoke location permissions through your device's Settings app",
           ]} />
           <P>
-            To exercise any of these rights, contact us at <a href="mailto:privacy@sterlingapp.com" style={{ color: "#818CF8" }}>privacy@sterlingapp.com</a>. We will respond within 30 days.
+            To exercise any of these rights, contact us at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>. We will respond within 30 days.
           </P>
         </Section>
 
         <Section title="9. Children's Privacy">
           <P>
-            Sterling is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at <a href="mailto:privacy@sterlingapp.com" style={{ color: "#818CF8" }}>privacy@sterlingapp.com</a>, and we will delete that information promptly.
+            Sterling is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>, and we will delete that information promptly.
           </P>
           <P>
             If we learn we have collected information from a child under 13 without verifiable parental consent, we will delete that information as quickly as possible.
@@ -198,7 +198,7 @@ export default function PrivacyPage() {
             "Right to Non-Discrimination: We will not discriminate against you for exercising any of your privacy rights.",
           ]} />
           <P>
-            To submit a verifiable consumer request, email us at <a href="mailto:privacy@sterlingapp.com" style={{ color: "#818CF8" }}>privacy@sterlingapp.com</a> or contact us through the app's Help Center. We will verify your identity before fulfilling a request.
+            To submit a verifiable consumer request, email us at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a> or contact us through the app's Help Center. We will verify your identity before fulfilling a request.
           </P>
         </Section>
 
@@ -219,7 +219,7 @@ export default function PrivacyPage() {
             Sterling is distributed through the Apple App Store. Our data practices comply with Apple's App Store Review Guidelines and App Privacy requirements. The following data types may be collected and linked to your identity:
           </P>
           <UL items={[
-            "Contact Info: name, email address, phone number",
+            "Contact Info: name, email address",
             "Location: precise location (with permission)",
             "User Content: photos, videos, posts, messages",
             "Identifiers: user ID, device ID",
@@ -244,10 +244,10 @@ export default function PrivacyPage() {
           <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "20px 24px", marginTop: 8 }}>
             <p style={{ margin: "0 0 8px", fontWeight: 600, color: "#fff" }}>Sterling</p>
             <p style={{ margin: "0 0 6px" }}>
-              Email: <a href="mailto:privacy@sterlingapp.com" style={{ color: "#818CF8" }}>privacy@sterlingapp.com</a>
+              Email: <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>
             </p>
             <p style={{ margin: "0 0 6px" }}>
-              Instagram: <a href="https://www.instagram.com/sterlinghollowco/" target="_blank" rel="noopener noreferrer" style={{ color: "#818CF8" }}>@sterlinghollowco</a>
+              Instagram: <a href="https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" style={{ color: "#818CF8" }}>@sterlingtheapp</a>
             </p>
             <p style={{ margin: 0 }}>
               X (Twitter): <a href="https://x.com/sterlingtheapp" target="_blank" rel="noopener noreferrer" style={{ color: "#818CF8" }}>@sterlingtheapp</a>
@@ -259,7 +259,7 @@ export default function PrivacyPage() {
 
       {/* Footer */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px", textAlign: "center", color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>
-        © 2024 Sterling. All rights reserved. · <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>Privacy Policy</a>
+        © 2026 Sterling. All rights reserved. · <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>Privacy Policy</a>
       </div>
     </div>
   );

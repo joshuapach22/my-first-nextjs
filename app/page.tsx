@@ -89,8 +89,10 @@ function MapScreen() {
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <img
         src="/Assets/IMG_0716.png"
-        alt="Phone screen 1"
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none", userSelect: "none" }}
       />
     </div>
   );
@@ -102,8 +104,10 @@ function FeedScreen() {
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <img
         src="/Assets/IMG_0715.png"
-        alt="Phone screen 2"
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", pointerEvents: "none", userSelect: "none" }}
       />
     </div>
   );
@@ -183,7 +187,7 @@ function StoreButtons() {
 /* ─── Page ────────────────────────────────────────────────────── */
 export default function Home() {
   return (
-    <div style={{ background: "#06061a", color: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "#06061a", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
 
       {/* ── Navbar ── */}
       <header style={{
@@ -373,7 +377,7 @@ export default function Home() {
               <h4 style={{ fontWeight: 600, fontSize: "0.95rem", margin: "0 0 16px" }}>Follow Us</h4>
               <div className="flex gap-3">
                 {[
-                  { Icon: InstagramIcon, href: "https://www.instagram.com/sterlinghollowco/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
+                  { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
                   { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
                 ].map(({ Icon, href, label }) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
@@ -394,7 +398,7 @@ export default function Home() {
           </div>
 
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 24, textAlign: "center", color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>
-            © 2024 Sterling. All rights reserved.
+            © 2026 Sterling. All rights reserved.
           </div>
         </div>
       </footer>
