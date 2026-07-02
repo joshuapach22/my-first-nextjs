@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import {
   UsersThree,
@@ -18,13 +18,15 @@ type TabKey = "overview" | "features" | "how" | "business" | "faq";
 /* ─── Sterling Logo (actual app icon) ──────────────────────────── */
 function SterlingLogo({ size = 36 }: { size?: number }) {
   return (
-    <img
-      src="/Assets/Sterling Logo.png"
-      alt="Sterling"
-      width={size}
-      height={size}
-      style={{ borderRadius: RADIUS.pill, objectFit: "contain" }}
-    />
+    <div style={{ width: size, height: size, borderRadius: RADIUS.pill, overflow: "hidden", flexShrink: 0 }}>
+      <img
+        src="/Assets/Sterling Logo.png"
+        alt="Sterling"
+        width={size}
+        height={size}
+        style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.18)" }}
+      />
+    </div>
   );
 }
 
@@ -171,34 +173,42 @@ function FAQAccordion() {
       {FAQS.map((item, i) => {
         const isOpen = openIndex === i;
         return (
-          <div key={item.q} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          <div key={item.q} style={{ borderBottom: "1px solid var(--border-08)" }}>
             <button
               onClick={() => setOpenIndex(isOpen ? null : i)}
               aria-expanded={isOpen}
               style={{
                 width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
                 gap: 16, background: "none", border: "none", cursor: "pointer",
-                padding: "14px 4px", textAlign: "left", color: "#fff",
+                padding: "14px 4px", textAlign: "left", color: "var(--text-primary)",
                 fontSize: "0.95rem", fontWeight: 600,
               }}
             >
               {item.q}
               <CaretDown
                 size={16}
-                color="rgba(255,255,255,0.55)"
+                color="var(--text-55)"
                 style={{ flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
               />
             </button>
-            {isOpen && (
-              <div style={{ padding: "0 4px 14px", color: "rgba(255,255,255,0.6)", fontSize: "0.85rem", lineHeight: 1.55, maxWidth: "65ch" }}>
-                <p style={{ margin: item.link ? "0 0 6px" : 0 }}>{item.a}</p>
-                {item.link && (
-                  <Link href={item.link.href} style={{ color: "#818CF8", textDecoration: "none" }}>
-                    {item.link.label}
-                  </Link>
-                )}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateRows: isOpen ? "1fr" : "0fr",
+                transition: "grid-template-rows 0.25s ease",
+              }}
+            >
+              <div style={{ overflow: "hidden", minHeight: 0 }}>
+                <div style={{ padding: "0 4px 14px", color: "var(--text-6)", fontSize: "0.85rem", lineHeight: 1.55, maxWidth: "65ch" }}>
+                  <p style={{ margin: item.link ? "0 0 6px" : 0 }}>{item.a}</p>
+                  {item.link && (
+                    <Link href={item.link.href} style={{ color: "#818CF8", textDecoration: "none" }}>
+                      {item.link.label}
+                    </Link>
+                  )}
+                </div>
               </div>
-            )}
+            </div>
           </div>
         );
       })}
@@ -212,19 +222,19 @@ function OverviewPanel() {
     <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 w-full max-w-6xl mx-auto">
       <div className="flex-1 max-w-md w-full text-center lg:text-left">
         <span style={{
-          display: "inline-block", background: "rgba(255,255,255,0.07)",
-          border: "1px solid rgba(255,255,255,0.14)", borderRadius: RADIUS.pill,
-          padding: "5px 14px", fontSize: "clamp(0.65rem, 2vw, 0.78rem)", color: "rgba(255,255,255,0.78)", marginBottom: "clamp(10px,2vh,20px)",
+          display: "inline-block", background: "var(--card-bg-07)",
+          border: "1px solid var(--border-14)", borderRadius: RADIUS.pill,
+          padding: "5px 14px", fontSize: "clamp(0.65rem, 2vw, 0.78rem)", color: "var(--text-78)", marginBottom: "clamp(10px,2vh,20px)",
         }}>The social network for real estate people</span>
         <h1 style={{
           fontSize: "clamp(1.8rem, 6vw, 3.4rem)", fontWeight: 800,
           lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 clamp(8px,1.5vh,16px)",
         }}>
-          <span style={{ background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          <span style={{ background: "linear-gradient(135deg,var(--heading-gradient-start) 0%,var(--heading-gradient-end) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             Connect. Share. Grow.
           </span>
         </h1>
-        <p style={{ fontSize: "clamp(0.8rem, 2.2vw, 0.98rem)", color: "rgba(255,255,255,0.62)", lineHeight: 1.6, marginBottom: "clamp(12px,2vh,24px)", maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ fontSize: "clamp(0.8rem, 2.2vw, 0.98rem)", color: "var(--text-62)", lineHeight: 1.6, marginBottom: "clamp(12px,2vh,24px)", maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>
           Sterling is free for every real estate professional to connect, share insights, and grow their business.
         </p>
         <StoreButtons />
@@ -256,14 +266,14 @@ function FeaturesPanel() {
       <h2 style={{ fontSize: "clamp(1.3rem, 3.5vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(14px,3vh,28px)", textAlign: "center" }}>
         Everything you need in one place
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-white/8 md:divide-y-0 md:divide-x">
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-[var(--border-08)] md:divide-y-0 md:divide-x">
         {items.map(({ Icon, title, desc }) => (
           <div key={title} style={{ padding: "clamp(10px,2vh,20px) clamp(12px,3vw,28px)", textAlign: "center" }}>
             <div style={{ width: 40, height: 40, background: "transparent", border: "1px solid rgba(129,140,248,0.35)", borderRadius: RADIUS.card, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto clamp(8px,1.5vh,14px)" }}>
               <Icon size={19} color="#818CF8" weight="regular" />
             </div>
             <h3 style={{ fontWeight: 700, fontSize: "0.98rem", margin: "0 0 6px" }}>{title}</h3>
-            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
+            <p style={{ color: "var(--text-52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
           </div>
         ))}
       </div>
@@ -283,7 +293,7 @@ function HowItWorksPanel() {
       <h2 style={{ fontSize: "clamp(1.1rem, 2.8vh, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(8px,1.6vh,28px)", textAlign: "center" }}>
         How Sterling works
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-white/8 md:divide-y-0 md:divide-x">
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-[var(--border-08)] md:divide-y-0 md:divide-x">
         {steps.map(({ img, pos, title, desc }) => (
           <div key={title} style={{ padding: "clamp(8px,1.6vh,20px) clamp(12px,3vw,28px)", textAlign: "center" }}>
             <div
@@ -299,7 +309,7 @@ function HowItWorksPanel() {
               />
             </div>
             <h3 style={{ fontWeight: 700, fontSize: "0.98rem", margin: "0 0 4px" }}>{title}</h3>
-            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
+            <p style={{ color: "var(--text-52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
           </div>
         ))}
       </div>
@@ -315,7 +325,7 @@ function ForBusinessPanel() {
         <h2 style={{ fontSize: "clamp(1.1rem, 2.8vh, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(6px,1.2vh,16px)" }}>
           Where real estate professionals connect
         </h2>
-        <p style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.5, fontSize: "clamp(0.72rem,1.9vh,0.85rem)", marginBottom: "clamp(8px,1.5vh,18px)", maxWidth: "48ch", marginLeft: "auto", marginRight: "auto" }}>
+        <p style={{ color: "var(--text-58)", lineHeight: 1.5, fontSize: "clamp(0.72rem,1.9vh,0.85rem)", marginBottom: "clamp(8px,1.5vh,18px)", maxWidth: "48ch", marginLeft: "auto", marginRight: "auto" }}>
           Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
         </p>
         <ul style={{ listStyle: "none", padding: 0, margin: "0 0 clamp(10px,1.5vh,20px)", display: "inline-flex", flexDirection: "column", gap: "clamp(3px,0.8vh,7px)", textAlign: "left" }}>
@@ -325,7 +335,7 @@ function ForBusinessPanel() {
             "Ask real questions and get answers from people who've done it",
             "Build a reputation and a network that follows your whole career",
           ].map((line) => (
-            <li key={line} style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "rgba(255,255,255,0.72)", fontSize: "clamp(0.72rem,1.9vh,0.85rem)", lineHeight: 1.4 }}>
+            <li key={line} className="justify-center lg:justify-start" style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--text-72)", fontSize: "clamp(0.72rem,1.9vh,0.85rem)", lineHeight: 1.4, textAlign: "left" }}>
               <span style={{ width: 5, height: 5, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 7, flexShrink: 0 }} />
               {line}
             </li>
@@ -337,7 +347,7 @@ function ForBusinessPanel() {
       </div>
 
       <div className="hidden lg:flex" style={{
-        background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+        background: "var(--card-bg-04)", border: "1px solid var(--border-08)",
         borderRadius: RADIUS.card, padding: "clamp(24px,4vh,48px) clamp(20px,4vw,40px)",
         alignItems: "center", justifyContent: "center",
         position: "relative", overflow: "hidden",
@@ -353,6 +363,11 @@ function ForBusinessPanel() {
 /* ─── Mobile app shell (single viewport, tab-switched) ─────────── */
 function MobileApp() {
   const [tab, setTab] = useState<TabKey>("overview");
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (mainRef.current) mainRef.current.scrollTop = 0;
+  }, [tab]);
 
   const navItems: { key: TabKey; label: string }[] = [
     { key: "features", label: "Features" },
@@ -362,18 +377,18 @@ function MobileApp() {
   ];
 
   return (
-    <div className="flex flex-col lg:hidden" style={{ height: "100svh", background: "#06061a", color: "#fff", overflow: "hidden" }}>
+    <div className="flex flex-col lg:hidden" style={{ height: "100svh", background: "var(--bg)", color: "var(--text-primary)", overflow: "hidden" }}>
 
       {/* ── Navbar ── */}
       <header style={{
         flexShrink: 0, position: "relative", zIndex: 50,
-        background: "rgba(6,6,26,0.82)", backdropFilter: "blur(18px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--nav-bg)", backdropFilter: "blur(18px)",
+        borderBottom: "1px solid var(--border-06)",
       }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
           <Link href="/" onClick={() => setTab("overview")} className="flex items-center gap-2 no-underline">
-            <SterlingLogo size={30} />
-            <span style={{ fontWeight: 700, fontSize: "1rem", color: "#fff" }}>Sterling</span>
+            <SterlingLogo size={36} />
+            <span style={{ fontWeight: 700, fontSize: "1rem", color: "var(--text-primary)" }}>Sterling</span>
           </Link>
           <nav className="hidden md:flex items-center gap-6 overflow-x-auto">
             {navItems.map((item) => (
@@ -382,7 +397,7 @@ function MobileApp() {
                 onClick={() => setTab(item.key)}
                 style={{
                   background: "none", border: "none", cursor: "pointer",
-                  color: tab === item.key ? "#fff" : "rgba(255,255,255,0.62)",
+                  color: tab === item.key ? "var(--text-primary)" : "var(--text-62)",
                   fontWeight: tab === item.key ? 700 : 400,
                   textDecoration: "none", fontSize: "0.85rem", transition: "color 0.2s", padding: 0,
                 }}
@@ -407,7 +422,7 @@ function MobileApp() {
               onClick={() => setTab(item.key)}
               style={{
                 background: "none", border: "none", cursor: "pointer", whiteSpace: "nowrap",
-                color: tab === item.key ? "#fff" : "rgba(255,255,255,0.55)",
+                color: tab === item.key ? "var(--text-primary)" : "var(--text-55)",
                 fontWeight: tab === item.key ? 700 : 400,
                 fontSize: "0.78rem", padding: "8px 7px",
                 WebkitTapHighlightColor: "transparent", touchAction: "manipulation",
@@ -419,7 +434,8 @@ function MobileApp() {
 
       {/* ── Content (single viewport, tab-switched) ── */}
       <main
-        className={`relative flex flex-1 min-h-0 justify-center ${tab === "how" ? "items-start overflow-y-auto overflow-x-hidden overscroll-contain" : "items-center overflow-hidden"}`}
+        ref={mainRef}
+        className={`relative flex flex-1 min-h-0 justify-center ${tab === "how" ? "items-start overflow-y-auto overflow-x-hidden overscroll-contain" : tab === "faq" ? "items-start overflow-hidden" : "items-center overflow-hidden"}`}
         style={{
           padding: "clamp(12px,2.5vh,32px) clamp(16px,4vw,32px)",
           WebkitOverflowScrolling: tab === "how" ? "touch" : undefined,
@@ -446,15 +462,15 @@ function MobileApp() {
 
       {/* ── Footer strip ── */}
       <footer style={{
-        flexShrink: 0, background: "#06061a", borderTop: "1px solid rgba(255,255,255,0.06)",
+        flexShrink: 0, background: "var(--bg)", borderTop: "1px solid var(--border-06)",
         padding: "10px 16px",
       }}>
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2">
           <div className="flex items-center gap-2">
-            <SterlingLogo size={20} />
-            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem" }}>© 2026 Sterling</span>
+            <SterlingLogo size={24} />
+            <span style={{ color: "var(--text-4)", fontSize: "0.72rem" }}>© 2026 Sterling</span>
           </div>
-          <Link href="/privacy" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: "0.72rem" }}>Privacy Policy</Link>
+          <Link href="/privacy" style={{ color: "var(--text-45)", textDecoration: "none", fontSize: "0.72rem" }}>Privacy Policy</Link>
           <div className="flex gap-2">
             {[
               { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
@@ -462,9 +478,9 @@ function MobileApp() {
             ].map(({ Icon, href, label }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
                 width: 26, height: 26, borderRadius: RADIUS.button,
-                background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--card-bg-06)", border: "1px solid var(--border-08)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                color: "rgba(255,255,255,0.58)", textDecoration: "none",
+                color: "var(--text-58)", textDecoration: "none",
               }}>
                 <Icon />
               </a>
@@ -486,23 +502,23 @@ function DesktopApp() {
   ];
 
   return (
-    <div className="hidden lg:block" style={{ background: "#06061a", color: "#fff" }}>
+    <div className="hidden lg:block" style={{ background: "var(--bg)", color: "var(--text-primary)" }}>
 
       {/* ── Navbar ── */}
       <header className="sticky top-0 z-50" style={{
-        background: "rgba(6,6,26,0.82)", backdropFilter: "blur(18px)",
-        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        background: "var(--nav-bg)", backdropFilter: "blur(18px)",
+        borderBottom: "1px solid var(--border-06)",
       }}>
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 no-underline">
-            <SterlingLogo size={34} />
-            <span style={{ fontWeight: 700, fontSize: "1.12rem", color: "#fff" }}>Sterling</span>
+            <SterlingLogo size={40} />
+            <span style={{ fontWeight: 700, fontSize: "1.12rem", color: "var(--text-primary)" }}>Sterling</span>
           </Link>
           <nav className="flex items-center gap-8">
             {navItems.map((item) => (
-              <a key={item.label} href={item.href} style={{ color: "rgba(255,255,255,0.68)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}
-                onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-                onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.68)")}
+              <a key={item.label} href={item.href} style={{ color: "var(--text-68)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "var(--text-primary)")}
+                onMouseLeave={e => (e.currentTarget.style.color = "var(--text-68)")}
               >{item.label}</a>
             ))}
           </nav>
@@ -525,16 +541,16 @@ function DesktopApp() {
           <div className="flex items-center gap-12">
             <div className="flex-1 max-w-xl">
               <span style={{
-                display: "inline-block", background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.14)", borderRadius: RADIUS.pill,
-                padding: "6px 18px", fontSize: "0.85rem", color: "rgba(255,255,255,0.78)", marginBottom: 28,
+                display: "inline-block", background: "var(--card-bg-07)",
+                border: "1px solid var(--border-14)", borderRadius: RADIUS.pill,
+                padding: "6px 18px", fontSize: "0.85rem", color: "var(--text-78)", marginBottom: 28,
               }}>The social network for real estate people</span>
               <h1 style={{ fontSize: "4rem", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 20px" }}>
-                <span style={{ background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                <span style={{ background: "linear-gradient(135deg,var(--heading-gradient-start) 0%,var(--heading-gradient-end) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                   Connect. Share. Grow.
                 </span>
               </h1>
-              <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.62)", lineHeight: 1.7, marginBottom: 32, maxWidth: 420 }}>
+              <p style={{ fontSize: "1.05rem", color: "var(--text-62)", lineHeight: 1.7, marginBottom: 32, maxWidth: 420 }}>
                 Sterling is free for every real estate professional to connect, share insights, and grow their business.
               </p>
               <StoreButtons />
@@ -548,12 +564,12 @@ function DesktopApp() {
       </section>
 
       {/* ── Features ── */}
-      <section id="features" style={{ background: "linear-gradient(180deg,#0d0b2e 0%,#06061a 100%)", padding: "110px 0" }}>
+      <section id="features" style={{ background: "linear-gradient(180deg,var(--bg-alt) 0%,var(--bg) 100%)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6">
           <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
             Everything you need in one place
           </h2>
-          <div className="grid grid-cols-3 divide-x divide-white/8">
+          <div className="grid grid-cols-3 divide-x divide-[var(--border-08)]">
             {[
               { Icon: UsersThree, title: "Connect with agents near you", desc: "Build a professional network with agents, brokers, and specialists working in your market." },
               { Icon: ShareNetwork, title: "Share listings and insights", desc: "Post listings, market insights, and wins to a feed built for real estate professionals." },
@@ -564,7 +580,7 @@ function DesktopApp() {
                   <Icon size={26} color="#818CF8" weight="regular" />
                 </div>
                 <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
+                <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -572,12 +588,12 @@ function DesktopApp() {
       </section>
 
       {/* ── How It Works ── */}
-      <section id="how-it-works" style={{ background: "#06061a", padding: "110px 0" }}>
+      <section id="how-it-works" style={{ background: "var(--bg)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6">
           <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
             How Sterling works
           </h2>
-          <div className="grid grid-cols-3 divide-x divide-white/8">
+          <div className="grid grid-cols-3 divide-x divide-[var(--border-08)]">
             {[
               { img: "/Assets/uneditedcommunityscreen.PNG", pos: "10% 8%", title: "Build your profile", desc: "Add your name, brokerage, and specialties so other agents know who they're connecting with." },
               { img: "/Assets/homefeedunedited.PNG", pos: "50% 15%", title: "Post to the feed", desc: "Share listings, market insights, and wins with your network." },
@@ -594,7 +610,7 @@ function DesktopApp() {
                   />
                 </div>
                 <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
+                <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -602,13 +618,13 @@ function DesktopApp() {
       </section>
 
       {/* ── For Business ── */}
-      <section id="for-business" style={{ background: "linear-gradient(180deg,#06061a 0%,#0d0b2e 100%)", padding: "110px 0" }}>
+      <section id="for-business" style={{ background: "linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-16 items-center">
           <div>
             <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 20px" }}>
               Where real estate professionals connect
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.7, fontSize: "1rem", marginBottom: 28, maxWidth: "52ch" }}>
+            <p style={{ color: "var(--text-58)", lineHeight: 1.7, fontSize: "1rem", marginBottom: 28, maxWidth: "52ch" }}>
               Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
             </p>
             <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -618,7 +634,7 @@ function DesktopApp() {
                 "Ask real questions and get answers from people who've done it",
                 "Build a reputation and a network that follows your whole career",
               ].map((line) => (
-                <li key={line} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: "rgba(255,255,255,0.72)", fontSize: "1rem" }}>
+                <li key={line} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: "var(--text-72)", fontSize: "1rem" }}>
                   <span style={{ width: 6, height: 6, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 9, flexShrink: 0 }} />
                   {line}
                 </li>
@@ -628,7 +644,7 @@ function DesktopApp() {
           </div>
 
           <div style={{
-            background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+            background: "var(--card-bg-04)", border: "1px solid var(--border-08)",
             borderRadius: RADIUS.card, padding: "64px 48px",
             display: "flex", alignItems: "center", justifyContent: "center",
             position: "relative", overflow: "hidden",
@@ -640,7 +656,7 @@ function DesktopApp() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" style={{ background: "#0d0b2e", padding: "110px 0" }}>
+      <section id="faq" style={{ background: "var(--bg-alt)", padding: "110px 0" }}>
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px" }}>
           <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 48px", textAlign: "center" }}>
             Frequently asked questions
@@ -650,13 +666,13 @@ function DesktopApp() {
       </section>
 
       {/* ── Footer ── */}
-      <footer style={{ background: "#06061a", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 24px" }}>
+      <footer style={{ background: "var(--bg)", borderTop: "1px solid var(--border-06)", padding: "48px 24px" }}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <SterlingLogo size={28} />
-            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.9rem" }}>© 2026 Sterling</span>
+            <SterlingLogo size={32} />
+            <span style={{ color: "var(--text-4)", fontSize: "0.9rem" }}>© 2026 Sterling</span>
           </div>
-          <Link href="/privacy" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: "0.9rem" }}>Privacy Policy</Link>
+          <Link href="/privacy" style={{ color: "var(--text-45)", textDecoration: "none", fontSize: "0.9rem" }}>Privacy Policy</Link>
           <div className="flex gap-3">
             {[
               { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
@@ -664,9 +680,9 @@ function DesktopApp() {
             ].map(({ Icon, href, label }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
                 width: 38, height: 38, borderRadius: RADIUS.button,
-                background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
+                background: "var(--card-bg-06)", border: "1px solid var(--border-08)",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                color: "rgba(255,255,255,0.58)", textDecoration: "none",
+                color: "var(--text-58)", textDecoration: "none",
               }}>
                 <Icon />
               </a>

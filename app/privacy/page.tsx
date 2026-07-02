@@ -12,10 +12,10 @@ const LAST_UPDATED = "July 1, 2026";
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section style={{ marginBottom: 48 }}>
-      <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "#fff", marginBottom: 16, paddingBottom: 10, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text-primary)", marginBottom: 16, paddingBottom: 10, borderBottom: "1px solid var(--border-08)" }}>
         {title}
       </h2>
-      <div style={{ color: "rgba(255,255,255,0.65)", lineHeight: 1.8, fontSize: "0.97rem" }}>
+      <div style={{ color: "var(--text-65)", lineHeight: 1.8, fontSize: "0.97rem" }}>
         {children}
       </div>
     </section>
@@ -24,7 +24,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 function SubHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 style={{ fontSize: "1.02rem", fontWeight: 700, color: "#fff", margin: "28px 0 12px" }}>
+    <h3 style={{ fontSize: "1.02rem", fontWeight: 700, color: "var(--text-primary)", margin: "28px 0 12px" }}>
       {children}
     </h3>
   );
@@ -47,7 +47,7 @@ function UL({ items }: { items: React.ReactNode[] }) {
 function Group({ label, items }: { label: string; items: string[] }) {
   return (
     <div style={{ marginBottom: 20 }}>
-      <p style={{ fontWeight: 600, color: "rgba(255,255,255,0.88)", margin: "0 0 8px" }}>{label}</p>
+      <p style={{ fontWeight: 600, color: "var(--text-88)", margin: "0 0 8px" }}>{label}</p>
       <UL items={items} />
     </div>
   );
@@ -55,22 +55,24 @@ function Group({ label, items }: { label: string; items: string[] }) {
 
 export default function PrivacyPage() {
   return (
-    <div style={{ background: "#06061a", color: "#fff", minHeight: "100vh" }}>
+    <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100vh" }}>
 
       {/* Navbar */}
-      <header style={{ background: "rgba(6,6,26,0.95)", borderBottom: "1px solid rgba(255,255,255,0.06)", position: "sticky", top: 0, zIndex: 50 }}>
+      <header style={{ background: "var(--nav-bg-solid)", borderBottom: "1px solid var(--border-06)", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <img
-              src="/Assets/Sterling Logo.png"
-              alt="Sterling"
-              width={32}
-              height={32}
-              style={{ borderRadius: "44px", objectFit: "contain" }}
-            />
-            <span style={{ fontWeight: 700, fontSize: "1.1rem", color: "#fff" }}>Sterling</span>
+            <div style={{ width: 38, height: 38, borderRadius: 9999, overflow: "hidden", flexShrink: 0 }}>
+              <img
+                src="/Assets/Sterling Logo.png"
+                alt="Sterling"
+                width={38}
+                height={38}
+                style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.18)" }}
+              />
+            </div>
+            <span style={{ fontWeight: 700, fontSize: "1.1rem", color: "var(--text-primary)" }}>Sterling</span>
           </Link>
-          <Link href="/" style={{ color: "rgba(255,255,255,0.6)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}>
+          <Link href="/" style={{ color: "var(--text-6)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}>
             ← Back to Home
           </Link>
         </div>
@@ -81,11 +83,11 @@ export default function PrivacyPage() {
 
         {/* Title */}
         <div style={{ marginBottom: 48 }}>
-          <h1 style={{ fontSize: "clamp(2rem,5vw,3rem)", fontWeight: 800, margin: "0 0 12px", background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+          <h1 style={{ fontSize: "clamp(2rem,5vw,3rem)", fontWeight: 800, margin: "0 0 12px", background: "linear-gradient(135deg,var(--heading-gradient-start) 0%,var(--heading-gradient-end) 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             Privacy Policy
           </h1>
-          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem", margin: "0 0 4px" }}>Effective date: {EFFECTIVE_DATE}</p>
-          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem" }}>Last updated: {LAST_UPDATED}</p>
+          <p style={{ color: "var(--text-45)", fontSize: "0.9rem", margin: "0 0 4px" }}>Effective date: {EFFECTIVE_DATE}</p>
+          <p style={{ color: "var(--text-45)", fontSize: "0.9rem" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         <Section title="1. Introduction">
@@ -236,12 +238,12 @@ export default function PrivacyPage() {
         <Section title="8. Your Rights and Choices">
           <P>Depending on your jurisdiction, you may have the right to:</P>
           <UL items={[
-            <><strong style={{ color: "#fff" }}>Access</strong> - Request a copy of the personal information we hold about you.</>,
-            <><strong style={{ color: "#fff" }}>Correct</strong> - Request that we correct inaccurate or incomplete information in your account.</>,
-            <><strong style={{ color: "#fff" }}>Delete</strong> - Request deletion of your account and associated personal data.</>,
-            <><strong style={{ color: "#fff" }}>Portability</strong> - Request a machine-readable export of your data where technically feasible.</>,
-            <><strong style={{ color: "#fff" }}>Opt Out</strong> - Opt out of push notifications at any time through your device notification settings.</>,
-            <><strong style={{ color: "#fff" }}>Revoke Permissions</strong> - Withdraw location, camera, photo library, or microphone permissions at any time through your device settings. Note that revoking certain permissions may limit App functionality.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Access</strong> - Request a copy of the personal information we hold about you.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Correct</strong> - Request that we correct inaccurate or incomplete information in your account.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Delete</strong> - Request deletion of your account and associated personal data.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Portability</strong> - Request a machine-readable export of your data where technically feasible.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Opt Out</strong> - Opt out of push notifications at any time through your device notification settings.</>,
+            <><strong style={{ color: "var(--text-primary)" }}>Revoke Permissions</strong> - Withdraw location, camera, photo library, or microphone permissions at any time through your device settings. Note that revoking certain permissions may limit App functionality.</>,
           ]} />
           <P>To exercise any of these rights, please contact us using the information provided in Section 11.</P>
         </Section>
@@ -267,8 +269,8 @@ export default function PrivacyPage() {
 
         <Section title="11. Contact Us">
           <P>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out to us:</P>
-          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "20px 24px", marginTop: 8 }}>
-            <p style={{ margin: "0 0 8px", fontWeight: 600, color: "#fff" }}>Sterling Hollow</p>
+          <div style={{ background: "var(--card-bg-04)", border: "1px solid var(--border-08)", borderRadius: 16, padding: "20px 24px", marginTop: 8 }}>
+            <p style={{ margin: "0 0 8px", fontWeight: 600, color: "var(--text-primary)" }}>Sterling Hollow</p>
             <p style={{ margin: "0 0 6px" }}>
               Email: <a href="mailto:support@sterlinghollow.com" style={{ color: "#818CF8" }}>support@sterlinghollow.com</a>
             </p>
@@ -286,9 +288,9 @@ export default function PrivacyPage() {
       </div>
 
       {/* Footer */}
-      <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px", textAlign: "center", color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>
+      <div style={{ borderTop: "1px solid var(--border-06)", padding: "24px", textAlign: "center", color: "var(--text-28)", fontSize: "0.82rem" }}>
         <p style={{ margin: "0 0 4px" }}>© 2026 Sterling Hollow. All rights reserved.</p>
-        <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>Privacy Policy</a>
+        <a href="/privacy" style={{ color: "var(--text-4)", textDecoration: "none" }}>Privacy Policy</a>
       </div>
     </div>
   );
