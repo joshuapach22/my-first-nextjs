@@ -2,11 +2,12 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Sterling",
+  title: "Privacy Policy - Sterling",
   description: "Sterling's privacy policy explains how we collect, use, and protect your personal information.",
 };
 
-const LAST_UPDATED = "June 25, 2026";
+const EFFECTIVE_DATE = "July 1, 2026";
+const LAST_UPDATED = "July 1, 2026";
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -21,17 +22,34 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
+function SubHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 style={{ fontSize: "1.02rem", fontWeight: 700, color: "#fff", margin: "28px 0 12px" }}>
+      {children}
+    </h3>
+  );
+}
+
 function P({ children }: { children: React.ReactNode }) {
   return <p style={{ margin: "0 0 14px" }}>{children}</p>;
 }
 
-function UL({ items }: { items: string[] }) {
+function UL({ items }: { items: React.ReactNode[] }) {
   return (
     <ul style={{ margin: "0 0 14px", paddingLeft: 24 }}>
-      {items.map((item) => (
-        <li key={item} style={{ marginBottom: 6 }}>{item}</li>
+      {items.map((item, i) => (
+        <li key={i} style={{ marginBottom: 6 }}>{item}</li>
       ))}
     </ul>
+  );
+}
+
+function Group({ label, items }: { label: string; items: string[] }) {
+  return (
+    <div style={{ marginBottom: 20 }}>
+      <p style={{ fontWeight: 600, color: "rgba(255,255,255,0.88)", margin: "0 0 8px" }}>{label}</p>
+      <UL items={items} />
+    </div>
   );
 }
 
@@ -66,200 +84,211 @@ export default function PrivacyPage() {
           <h1 style={{ fontSize: "clamp(2rem,5vw,3rem)", fontWeight: 800, margin: "0 0 12px", background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
             Privacy Policy
           </h1>
+          <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem", margin: "0 0 4px" }}>Effective date: {EFFECTIVE_DATE}</p>
           <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem" }}>Last updated: {LAST_UPDATED}</p>
         </div>
 
         <Section title="1. Introduction">
           <P>
-            Welcome to Sterling ("we," "our," or "us"). Sterling is a social networking platform built for real estate professionals, available on iOS and Android. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application and website (collectively, the "Service").
+            Welcome to Sterling Hollow (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). Sterling Hollow is a mobile platform designed for real estate professionals, including agents, investors, landlords, and contractors, to connect, collaborate, manage property operations, and grow their networks.
           </P>
           <P>
-            Please read this policy carefully. By using Sterling, you agree to the practices described here. If you do not agree, please do not use our Service.
+            This Privacy Policy explains how we collect, use, disclose, and protect your information when you use the Sterling Hollow mobile application (the &quot;App&quot;). Please read this policy carefully. By creating an account or using the App, you acknowledge that you have read and understood this Privacy Policy.
+          </P>
+          <P>
+            If you do not agree with any part of this policy, please discontinue use of the App.
           </P>
         </Section>
 
         <Section title="2. Information We Collect">
-          <P><strong style={{ color: "#fff" }}>Information you provide directly:</strong></P>
-          <UL items={[
-            "Account details: name, email address, and password",
-            "Profile information: photo, job title, brokerage, license number, bio, and location",
-            "Content you post: listings, photos, videos, comments, polls, messages, and community posts",
-            "Communications: messages sent through the app's inbox and any support requests you submit",
+          <SubHeading>2.1 Information You Provide Directly</SubHeading>
+          <Group label="Account Registration" items={[
+            "Email address",
+            "Phone number",
+            "Username and password",
+          ]} />
+          <Group label="Professional Profile" items={[
+            "Full name and profile photo (avatar and banner image)",
+            "Bio and professional role (e.g., Real Estate Agent, Investor, Landlord, Vendor/Contractor)",
+            "Areas of specialization, operating markets, and professional goals",
+            "Interest categories selected during onboarding",
+          ]} />
+          <Group label="Posts & Community Content" items={[
+            "Text, photos, and videos posted to community feeds",
+            "Comments, likes, and reactions to other members' content",
+            "Property attachments shared within posts",
+          ]} />
+          <Group label="Direct Messages" items={[
+            "Content of private conversations, including text, photos, and shared property or location links",
+          ]} />
+          <Group label="Property & Operations Data" items={[
+            "Property address, type, and physical details (bedrooms, bathrooms, square footage)",
+            "Photos associated with a property",
+            "User-entered financial estimates, including market value, after-repair value (ARV), cap rate, cash flow projections, and rehab budget",
+          ]} />
+          <Group label="Events" items={[
+            "Event details you create (title, location, date, time, type)",
+            "RSVPs and attendee information",
+          ]} />
+          <Group label="Reports" items={[
+            "Content and context submitted when reporting a post or user",
           ]} />
 
-          <P><strong style={{ color: "#fff" }}>Information collected automatically:</strong></P>
+          <SubHeading>2.2 Information Collected Automatically</SubHeading>
           <UL items={[
-            "Device identifiers: device type, operating system version, unique device ID, and advertising ID (IDFA/GAID)",
-            "Usage data: pages viewed, features used, search queries, and interactions within the app",
-            "Location data: precise GPS location when you use map features (only with your permission)",
-            "Log data: IP address, browser type, referring URLs, and timestamps of access",
-            "Cookies and similar technologies: session tokens and analytics identifiers",
+            "Device type, operating system version, and unique device identifiers",
+            "App version, screens viewed, features accessed, and interaction timestamps",
+            "Notification tokens used to deliver alerts to your device",
+            "IP address, crash reports, and performance diagnostics",
           ]} />
 
-          <P><strong style={{ color: "#fff" }}>Information from third parties:</strong></P>
-          <UL items={[
-            "If you sign in with Apple or Google, we receive your name and email from those providers",
-            "Public MLS or real estate listing data you import or link to your profile",
+          <SubHeading>2.3 Information Collected With Your Permission</SubHeading>
+          <Group label="Location" items={[
+            "Approximate or precise location, used to center the Property Map around you and display nearby listings and events. You may revoke this permission at any time in device settings.",
+          ]} />
+          <Group label="Camera" items={[
+            "Access to your device camera when you choose to capture new photos or videos within the App.",
+          ]} />
+          <Group label="Photo Library" items={[
+            "Access to media on your device when you upload photos to posts, profiles, property listings, or chat.",
+          ]} />
+          <Group label="Microphone" items={[
+            "Audio access for recording audio content within the App.",
           ]} />
         </Section>
 
         <Section title="3. How We Use Your Information">
           <P>We use the information we collect to:</P>
           <UL items={[
-            "Create, operate, and maintain your account",
-            "Deliver the core features of the app: feed, messaging, deals map, and community boards",
-            "Personalize content, suggested connections, and listing recommendations",
-            "Respond to your support requests and communicate service updates",
-            "Send push notifications (you can opt out at any time in device settings)",
-            "Analyze usage patterns to improve app performance and develop new features",
-            "Detect, investigate, and prevent fraudulent or prohibited activity",
-            "Comply with applicable laws, regulations, and legal processes",
-            "Enforce our Terms of Service",
+            "Create and manage your account and verify your identity",
+            "Deliver core App features: feed, communities, events, direct messaging, property operations, and maps",
+            "Display property and real estate data relevant to your markets",
+            "Surface relevant professionals, communities, and content through search and discovery",
+            "Send push notifications about community activity, new messages, event updates, and connection requests",
+            "Moderate content and enforce our Community Guidelines",
+            "Respond to support requests and resolve disputes",
+            "Analyze usage patterns to improve performance and develop new features",
+            "Comply with applicable legal obligations",
           ]} />
-          <P>We do not sell your personal information to third parties for their own marketing purposes.</P>
         </Section>
 
         <Section title="4. How We Share Your Information">
-          <P>We may share your information in the following circumstances:</P>
+          <P>We do not sell your personal information. We may share information only in the following circumstances:</P>
 
-          <P><strong style={{ color: "#fff" }}>With other users:</strong> Your profile, posts, listings, and activity are visible to other Sterling users as intended by the social features of the app. Direct messages are private between participants.</P>
+          <SubHeading>4.1 With Other Community Members</SubHeading>
+          <P>
+            Content you post publicly, including feed posts, comments, profile details, and connection counts, is visible to other members of your communities. Direct messages are visible only to you and the intended recipient(s). Community owners and moderators may see member activity within communities they manage.
+          </P>
 
-          <P><strong style={{ color: "#fff" }}>Service providers:</strong> We work with trusted vendors who help us operate the Service — including cloud hosting (e.g., AWS), analytics (e.g., Mixpanel), push notifications (e.g., APNs/FCM), and customer support tools. These providers are contractually required to protect your data and may only use it to provide services to us.</P>
+          <SubHeading>4.2 With Service Providers</SubHeading>
+          <P>To operate the App, we engage trusted third-party service providers in the following categories:</P>
+          <UL items={[
+            "Cloud infrastructure and database hosting",
+            "User authentication and account security",
+            "Mapping and location services",
+            "Property data and real estate information",
+            "Mobile notification delivery",
+            "Application performance monitoring",
+          ]} />
+          <P>
+            All service providers are contractually obligated to process your data only as directed by us, maintain appropriate security measures, and are prohibited from using your information for their own independent purposes.
+          </P>
 
-          <P><strong style={{ color: "#fff" }}>Business transfers:</strong> If Sterling is involved in a merger, acquisition, or asset sale, your information may be transferred as part of that transaction. We will notify you before your information becomes subject to a different privacy policy.</P>
+          <SubHeading>4.3 For Legal Reasons</SubHeading>
+          <P>
+            We may disclose your information if required by law, court order, or governmental authority, or when we reasonably believe disclosure is necessary to protect the rights, property, or safety of Sterling Hollow, our users, or the public.
+          </P>
 
-          <P><strong style={{ color: "#fff" }}>Legal compliance:</strong> We may disclose your information if required by law, subpoena, court order, or government authority, or when we believe disclosure is necessary to protect the rights, property, or safety of Sterling, our users, or the public.</P>
-
-          <P><strong style={{ color: "#fff" }}>With your consent:</strong> We may share your information for any other purpose with your explicit consent.</P>
+          <SubHeading>4.4 Business Transfers</SubHeading>
+          <P>
+            In the event of a merger, acquisition, reorganization, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change and the applicable choices you may have.
+          </P>
         </Section>
 
-        <Section title="5. Location Data">
+        <Section title="5. Data Retention">
           <P>
-            Sterling requests access to your device's precise location to power the property map and nearby-agent features. Location access is optional — you can deny or revoke it at any time in your device's Settings app. If location is disabled, map-based features will not function, but all other features remain available.
+            We retain your personal information for as long as your account is active or as needed to provide our services. You may request deletion of your account and associated data at any time by contacting us.
           </P>
           <P>
-            We do not sell your location data. Location data is used solely to display relevant listings and connections near you.
-          </P>
-        </Section>
-
-        <Section title="6. Data Retention">
-          <P>
-            We retain your personal information for as long as your account is active or as needed to provide you the Service. You may request deletion of your account and associated data at any time (see Section 8). We may retain certain information after deletion to comply with legal obligations, resolve disputes, and enforce our agreements.
-          </P>
-          <P>
-            Aggregated or de-identified data (which cannot reasonably identify you) may be retained indefinitely for analytics and product improvement.
+            Please note that some information may be retained for a limited period following account deletion to comply with legal obligations, resolve disputes, or enforce our agreements. Financial and property data you enter is stored solely for your own operational use and is not shared with third parties for their own purposes.
           </P>
         </Section>
 
-        <Section title="7. Data Security">
+        <Section title="6. Data Security">
+          <P>We implement industry-standard security measures to protect your information, including:</P>
+          <UL items={[
+            "Encrypted data transmission in transit",
+            "Secure on-device credential storage",
+            "Access controls and authentication on all backend systems",
+            "Regular assessments of our data handling practices",
+          ]} />
           <P>
-            We implement industry-standard technical and organizational measures to protect your information — including encryption in transit (TLS), encryption at rest, access controls, and regular security reviews.
+            While we take reasonable steps to protect your data, no method of transmission over the internet or electronic storage is 100% secure. We cannot guarantee absolute security and encourage you to use a strong, unique password for your account.
           </P>
+        </Section>
+
+        <Section title="7. Children's Privacy">
           <P>
-            No method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security. If you believe your account has been compromised, please contact us immediately.
+            Sterling Hollow is intended for use by adults and is not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected information from a child under 13, please contact us immediately and we will take steps to delete the information promptly.
           </P>
         </Section>
 
         <Section title="8. Your Rights and Choices">
-          <P>Depending on your location, you may have the following rights regarding your personal data:</P>
+          <P>Depending on your jurisdiction, you may have the right to:</P>
           <UL items={[
-            "Access: Request a copy of the personal information we hold about you",
-            "Correction: Request that we correct inaccurate or incomplete information",
-            "Deletion: Request deletion of your account and personal information",
-            "Portability: Request your data in a structured, machine-readable format",
-            "Opt-out of marketing: Unsubscribe from promotional emails using the link in any email",
-            "Push notifications: Disable at any time through your device's notification settings",
-            "Location: Revoke location permissions through your device's Settings app",
+            <><strong style={{ color: "#fff" }}>Access</strong> - Request a copy of the personal information we hold about you.</>,
+            <><strong style={{ color: "#fff" }}>Correct</strong> - Request that we correct inaccurate or incomplete information in your account.</>,
+            <><strong style={{ color: "#fff" }}>Delete</strong> - Request deletion of your account and associated personal data.</>,
+            <><strong style={{ color: "#fff" }}>Portability</strong> - Request a machine-readable export of your data where technically feasible.</>,
+            <><strong style={{ color: "#fff" }}>Opt Out</strong> - Opt out of push notifications at any time through your device notification settings.</>,
+            <><strong style={{ color: "#fff" }}>Revoke Permissions</strong> - Withdraw location, camera, photo library, or microphone permissions at any time through your device settings. Note that revoking certain permissions may limit App functionality.</>,
           ]} />
+          <P>To exercise any of these rights, please contact us using the information provided in Section 11.</P>
+        </Section>
+
+        <Section title="9. Third-Party Links and Services">
           <P>
-            To exercise any of these rights, contact us at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>. We will respond within 30 days.
+            The App may contain links to third-party websites, listings, or services. We are not responsible for the privacy practices of those third parties. We encourage you to review the privacy policies of any external services you access through the App.
           </P>
         </Section>
 
-        <Section title="9. Children's Privacy">
+        <Section title="10. Changes to This Privacy Policy">
           <P>
-            Sterling is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>, and we will delete that information promptly.
-          </P>
-          <P>
-            If we learn we have collected information from a child under 13 without verifiable parental consent, we will delete that information as quickly as possible.
-          </P>
-        </Section>
-
-        <Section title="10. California Privacy Rights (CCPA/CPRA)">
-          <P>
-            If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA) and California Privacy Rights Act (CPRA):
+            We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make changes, we will:
           </P>
           <UL items={[
-            "Right to Know: You may request disclosure of the categories and specific pieces of personal information we have collected about you, the purposes for which it is used, and the categories of third parties with whom it is shared.",
-            "Right to Delete: You may request deletion of your personal information, subject to certain exceptions.",
-            "Right to Correct: You may request correction of inaccurate personal information.",
-            "Right to Opt-Out of Sale/Sharing: Sterling does not sell personal information. We do not share personal information for cross-context behavioral advertising.",
-            "Right to Limit Use of Sensitive Personal Information: We do not use sensitive personal information for purposes beyond what is necessary to provide the Service.",
-            "Right to Non-Discrimination: We will not discriminate against you for exercising any of your privacy rights.",
+            "Update the \"Last Updated\" date at the top of this document",
+            "Notify you through the App or via email for material changes",
           ]} />
           <P>
-            To submit a verifiable consumer request, email us at <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a> or contact us through the app's Help Center. We will verify your identity before fulfilling a request.
+            Your continued use of the App after any update constitutes your acceptance of the revised Privacy Policy. We encourage you to review this policy periodically.
           </P>
         </Section>
 
-        <Section title="11. International Data Transfers">
-          <P>
-            Sterling is operated in the United States. If you access the Service from outside the United States, your information may be transferred to and processed in the United States or other countries where our service providers operate. These countries may have data protection laws that differ from those in your country. By using Sterling, you consent to such transfers.
-          </P>
-        </Section>
-
-        <Section title="12. Third-Party Links and Services">
-          <P>
-            The app may contain links to third-party websites, services, or integrations (for example, MLS data providers). This Privacy Policy does not apply to those third parties. We encourage you to review the privacy policies of any third-party services you access through Sterling.
-          </P>
-        </Section>
-
-        <Section title="13. Apple App Store Specific Disclosures">
-          <P>
-            Sterling is distributed through the Apple App Store. Our data practices comply with Apple's App Store Review Guidelines and App Privacy requirements. The following data types may be collected and linked to your identity:
-          </P>
-          <UL items={[
-            "Contact Info: name, email address",
-            "Location: precise location (with permission)",
-            "User Content: photos, videos, posts, messages",
-            "Identifiers: user ID, device ID",
-            "Usage Data: in-app activity and feature usage",
-          ]} />
-          <P>
-            You can review Sterling's App Privacy details on our App Store product page. To request deletion of your data, use the in-app Account Deletion feature (Settings → Account → Delete Account) or email us directly.
-          </P>
-        </Section>
-
-        <Section title="14. Changes to This Privacy Policy">
-          <P>
-            We may update this Privacy Policy from time to time to reflect changes in our practices, technology, or applicable law. We will notify you of material changes by updating the "Last Updated" date at the top of this page and, where appropriate, by sending a notification through the app or by email.
-          </P>
-          <P>
-            Your continued use of Sterling after the effective date of any updates constitutes your acceptance of the revised Privacy Policy.
-          </P>
-        </Section>
-
-        <Section title="15. Contact Us">
-          <P>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out:</P>
-          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: "20px 24px", marginTop: 8 }}>
-            <p style={{ margin: "0 0 8px", fontWeight: 600, color: "#fff" }}>Sterling</p>
+        <Section title="11. Contact Us">
+          <P>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please reach out to us:</P>
+          <div style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 16, padding: "20px 24px", marginTop: 8 }}>
+            <p style={{ margin: "0 0 8px", fontWeight: 600, color: "#fff" }}>Sterling Hollow</p>
             <p style={{ margin: "0 0 6px" }}>
-              Email: <a href="mailto:contact@sterlinghollow.com" style={{ color: "#818CF8" }}>contact@sterlinghollow.com</a>
-            </p>
-            <p style={{ margin: "0 0 6px" }}>
-              Instagram: <a href="https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" style={{ color: "#818CF8" }}>@sterlingtheapp</a>
+              Email: <a href="mailto:support@sterlinghollow.com" style={{ color: "#818CF8" }}>support@sterlinghollow.com</a>
             </p>
             <p style={{ margin: 0 }}>
-              X (Twitter): <a href="https://x.com/sterlingtheapp" target="_blank" rel="noopener noreferrer" style={{ color: "#818CF8" }}>@sterlingtheapp</a>
+              Website: <a href="https://sterlinghollow.com" style={{ color: "#818CF8" }}>sterlinghollow.com</a>
             </p>
           </div>
+          <P>
+            <span style={{ display: "block", marginTop: 14 }}>
+              We will respond to all inquiries within a reasonable timeframe and no later than 30 days of receipt.
+            </span>
+          </P>
         </Section>
 
       </div>
 
       {/* Footer */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "24px", textAlign: "center", color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>
-        © 2026 Sterling. All rights reserved. · <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>Privacy Policy</a>
+        <p style={{ margin: "0 0 4px" }}>© 2026 Sterling Hollow. All rights reserved.</p>
+        <a href="/privacy" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none" }}>Privacy Policy</a>
       </div>
     </div>
   );

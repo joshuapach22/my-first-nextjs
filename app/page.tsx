@@ -1,6 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import {
+  UsersThree,
+  ShareNetwork,
+  ChartLineUp,
+  Handshake,
+  CaretDown,
+} from "@phosphor-icons/react";
+
+/* ─── Shape system (one radius scale for the whole page) ───────── */
+const RADIUS = { pill: 9999, button: 12, card: 16 };
+
+type TabKey = "overview" | "features" | "how" | "business" | "faq";
 
 /* ─── Sterling Logo (actual app icon) ──────────────────────────── */
 function SterlingLogo({ size = 36 }: { size?: number }) {
@@ -10,57 +23,16 @@ function SterlingLogo({ size = 36 }: { size?: number }) {
       alt="Sterling"
       width={size}
       height={size}
-      style={{ borderRadius: "44px", objectFit: "contain" }}
+      style={{ borderRadius: RADIUS.pill, objectFit: "contain" }}
     />
-  );
-}
-
-/* ─── Small S icon for nav center button ──────────────────────── */
-function SIcon({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 200 200" fill="none">
-      <path
-        d="M 138,30 C 162,30 178,50 172,70 C 166,90 146,98 124,96 C 102,94 80,88 62,96 C 50,102 46,114 52,122 L 38,118 C 30,106 34,88 50,80 C 68,70 94,76 118,78 C 142,80 158,72 162,56 C 166,40 154,26 138,24 C 128,22 118,24 110,28 L 116,38 C 122,34 130,30 138,30 Z"
-        fill="white"
-      />
-      <path
-        d="M 62,118 C 38,118 22,138 28,158 C 34,178 54,186 76,184 C 98,182 120,172 136,160 L 126,152 C 112,162 94,170 76,172 C 58,174 44,164 40,150 C 36,136 48,122 66,118 C 84,114 108,118 128,118 C 148,118 164,108 170,94 C 176,80 168,64 154,60 L 148,70 C 158,74 162,86 156,96 C 150,106 136,112 120,112 C 104,112 82,112 62,118 Z"
-        fill="rgba(255,255,255,0.85)"
-      />
-    </svg>
   );
 }
 
 /* ─── Store icons ─────────────────────────────────────────────── */
 function AppleIcon() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
       <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-    </svg>
-  );
-}
-
-/* ─── Feature section icons ───────────────────────────────────── */
-function ConnectIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="17" cy="7" r="3" /><circle cx="7" cy="17" r="3" /><circle cx="7" cy="7" r="3" />
-      <path d="M14 7h3" /><path d="M7 14v3" /><path d="M14 14h3a3 3 0 0 1 3 3v1" />
-    </svg>
-  );
-}
-function ShareIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" />
-      <path d="M14 17.5h7" /><path d="M17.5 14v7" />
-    </svg>
-  );
-}
-function GrowIcon() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#818CF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 3v18h18" /><path d="M7 16l4-4 4 4 4-6" />
     </svg>
   );
 }
@@ -68,7 +40,7 @@ function GrowIcon() {
 /* ─── Social icons ────────────────────────────────────────────── */
 function InstagramIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="2" width="20" height="20" rx="5" />
       <circle cx="12" cy="12" r="4" />
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
@@ -77,7 +49,7 @@ function InstagramIcon() {
 }
 function XIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   );
@@ -88,7 +60,7 @@ function MapScreen() {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <img
-        src="/Assets/IMG_0716.png"
+        src="/Assets/unedited map tab.PNG"
         alt=""
         aria-hidden="true"
         draggable={false}
@@ -103,7 +75,7 @@ function FeedScreen() {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <img
-        src="/Assets/IMG_0715.png"
+        src="/Assets/homefeedunedited.PNG"
         alt=""
         aria-hidden="true"
         draggable={false}
@@ -114,48 +86,35 @@ function FeedScreen() {
 }
 
 /* ─── iPhone 15-style frame ──────────────────────────────────── */
-function IPhoneFrame({ screen, animClass }: { screen: React.ReactNode; animClass: string }) {
+function IPhoneFrame({ screen, scale = 1 }: { screen: React.ReactNode; scale?: number }) {
+  const s = (n: number) => n * scale;
   return (
-    <div className={animClass} style={{
-      width: 255, height: 528, position: "relative", flexShrink: 0,
-    }}>
-      {/* Chassis */}
+    <div style={{ width: s(255), height: s(528), position: "relative", flexShrink: 0 }}>
       <div style={{
-        position: "absolute", inset: 0, borderRadius: 50,
+        position: "absolute", inset: 0, borderRadius: s(50),
         background: "linear-gradient(145deg, #1e1e1e 0%, #111 60%, #1a1a1a 100%)",
         border: "1px solid rgba(255,255,255,0.13)",
         boxShadow: `
           0 0 0 0.5px rgba(255,255,255,0.08),
-          0 50px 120px rgba(0,0,0,0.75),
-          0 20px 50px rgba(0,0,0,0.5),
+          0 ${s(50)}px ${s(120)}px rgba(0,0,0,0.75),
+          0 ${s(20)}px ${s(50)}px rgba(0,0,0,0.5),
           inset 0 1px 0 rgba(255,255,255,0.12),
           inset 0 -1px 0 rgba(255,255,255,0.04)
         `,
       }} />
-
-      {/* Left side buttons */}
-      <div style={{ position: "absolute", left: -3, top: 108, width: 3, height: 30, background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
-      <div style={{ position: "absolute", left: -3, top: 155, width: 3, height: 52, background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
-      <div style={{ position: "absolute", left: -3, top: 218, width: 3, height: 52, background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
-      <div style={{ position: "absolute", right: -3, top: 168, width: 3, height: 76, background: "#252525", borderRadius: "0 2px 2px 0", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
-
-      {/* Screen bezel */}
-      <div style={{
-        position: "absolute", inset: 6, borderRadius: 45, overflow: "hidden",
-        background: "#000",
-      }}>
+      <div style={{ position: "absolute", left: -s(3), top: s(108), width: s(3), height: s(30), background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
+      <div style={{ position: "absolute", left: -s(3), top: s(155), width: s(3), height: s(52), background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
+      <div style={{ position: "absolute", left: -s(3), top: s(218), width: s(3), height: s(52), background: "#252525", borderRadius: "2px 0 0 2px", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
+      <div style={{ position: "absolute", right: -s(3), top: s(168), width: s(3), height: s(76), background: "#252525", borderRadius: "0 2px 2px 0", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)" }} />
+      <div style={{ position: "absolute", inset: s(6), borderRadius: s(45), overflow: "hidden", background: "#000" }}>
         {screen}
-        {/* Dynamic Island */}
         <div style={{
-          position: "absolute", top: 12, left: "50%", transform: "translateX(-50%)",
-          width: 118, height: 34, background: "#000",
-          borderRadius: 20, zIndex: 30,
+          position: "absolute", top: s(12), left: "50%", transform: "translateX(-50%)",
+          width: s(118), height: s(34), background: "#000", borderRadius: s(20), zIndex: 30,
           boxShadow: "0 0 0 1px rgba(255,255,255,0.06)",
         }} />
       </div>
-
-      {/* Bottom USB-C indicator */}
-      <div style={{ position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", width: 42, height: 5, background: "#1a1a1a", borderRadius: 3 }} />
+      <div style={{ position: "absolute", bottom: s(10), left: "50%", transform: "translateX(-50%)", width: s(42), height: s(5), background: "#1a1a1a", borderRadius: s(3) }} />
     </div>
   );
 }
@@ -163,11 +122,11 @@ function IPhoneFrame({ screen, animClass }: { screen: React.ReactNode; animClass
 /* ─── Store buttons ───────────────────────────────────────────── */
 function StoreButtons() {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-3 justify-center">
       <a href="#" style={{
-        display: "inline-flex", alignItems: "center", gap: 10,
-        padding: "10px 20px", background: "#000",
-        border: "1.5px solid rgba(255,255,255,0.16)", borderRadius: 12,
+        display: "inline-flex", alignItems: "center", gap: 9,
+        padding: "9px 18px", background: "#000",
+        border: "1.5px solid rgba(255,255,255,0.16)", borderRadius: RADIUS.button,
         color: "#fff", textDecoration: "none",
         transition: "background 0.2s, transform 0.15s",
       }}
@@ -176,40 +135,379 @@ function StoreButtons() {
       >
         <AppleIcon />
         <span>
-          <span style={{ display: "block", fontSize: 9, opacity: 0.65, lineHeight: 1, marginBottom: 2 }}>Download on the</span>
-          <span style={{ fontSize: 14, fontWeight: 600 }}>App Store</span>
+          <span style={{ display: "block", fontSize: 8, opacity: 0.65, lineHeight: 1, marginBottom: 2 }}>Download on the</span>
+          <span style={{ fontSize: 13, fontWeight: 600 }}>App Store</span>
         </span>
       </a>
     </div>
   );
 }
 
-/* ─── Page ────────────────────────────────────────────────────── */
-export default function Home() {
+/* ─── FAQ accordion ────────────────────────────────────────────── */
+const FAQS = [
+  {
+    q: "Is Sterling free to use?",
+    a: "Yes. Sterling is completely free for every real estate professional.",
+  },
+  {
+    q: "Do I need a real estate license to join?",
+    a: "No license required. Sterling is open to real estate professionals of all kinds.",
+  },
+  {
+    q: "Is Sterling available on Android?",
+    a: "Not yet. Sterling is currently available on iOS, with Android support planned for a future release.",
+  },
+  {
+    q: "How is my data used?",
+    a: "See our Privacy Policy for the full details on how we collect, use, and protect your information.",
+    link: { href: "/privacy", label: "Read the Privacy Policy" },
+  },
+];
+
+function FAQAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
-    <div style={{ background: "#06061a", color: "#fff", minHeight: "100vh", overflowX: "hidden" }}>
+    <div className="w-full">
+      {FAQS.map((item, i) => {
+        const isOpen = openIndex === i;
+        return (
+          <div key={item.q} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+            <button
+              onClick={() => setOpenIndex(isOpen ? null : i)}
+              aria-expanded={isOpen}
+              style={{
+                width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
+                gap: 16, background: "none", border: "none", cursor: "pointer",
+                padding: "14px 4px", textAlign: "left", color: "#fff",
+                fontSize: "0.95rem", fontWeight: 600,
+              }}
+            >
+              {item.q}
+              <CaretDown
+                size={16}
+                color="rgba(255,255,255,0.55)"
+                style={{ flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s" }}
+              />
+            </button>
+            {isOpen && (
+              <div style={{ padding: "0 4px 14px", color: "rgba(255,255,255,0.6)", fontSize: "0.85rem", lineHeight: 1.55, maxWidth: "65ch" }}>
+                <p style={{ margin: item.link ? "0 0 6px" : 0 }}>{item.a}</p>
+                {item.link && (
+                  <Link href={item.link.href} style={{ color: "#818CF8", textDecoration: "none" }}>
+                    {item.link.label}
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ─── Overview panel (hero) ─────────────────────────────────────── */
+function OverviewPanel() {
+  return (
+    <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-10 w-full max-w-6xl mx-auto">
+      <div className="flex-1 max-w-md w-full text-center lg:text-left">
+        <span style={{
+          display: "inline-block", background: "rgba(255,255,255,0.07)",
+          border: "1px solid rgba(255,255,255,0.14)", borderRadius: RADIUS.pill,
+          padding: "5px 14px", fontSize: "clamp(0.65rem, 2vw, 0.78rem)", color: "rgba(255,255,255,0.78)", marginBottom: "clamp(10px,2vh,20px)",
+        }}>The social network for real estate people</span>
+        <h1 style={{
+          fontSize: "clamp(1.8rem, 6vw, 3.4rem)", fontWeight: 800,
+          lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 clamp(8px,1.5vh,16px)",
+        }}>
+          <span style={{ background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            Connect. Share. Grow.
+          </span>
+        </h1>
+        <p style={{ fontSize: "clamp(0.8rem, 2.2vw, 0.98rem)", color: "rgba(255,255,255,0.62)", lineHeight: 1.6, marginBottom: "clamp(12px,2vh,24px)", maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>
+          Sterling is free for every real estate professional to connect, share insights, and grow their business.
+        </p>
+        <StoreButtons />
+      </div>
+
+      {/* Mobile / tablet: unchanged scale */}
+      <div className="flex lg:hidden justify-center items-end gap-2 sm:gap-3 w-full" style={{ flex: 1 }}>
+        <IPhoneFrame screen={<MapScreen />} scale={0.53} />
+        <IPhoneFrame screen={<FeedScreen />} scale={0.53} />
+      </div>
+      {/* Desktop: larger, more visible */}
+      <div className="hidden lg:flex justify-center items-end gap-4" style={{ flex: 1 }}>
+        <IPhoneFrame screen={<MapScreen />} scale={0.88} />
+        <IPhoneFrame screen={<FeedScreen />} scale={0.88} />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Features panel ───────────────────────────────────────────── */
+function FeaturesPanel() {
+  const items = [
+    { Icon: UsersThree, title: "Connect with agents near you", desc: "Build a professional network with agents, brokers, and specialists working in your market." },
+    { Icon: ShareNetwork, title: "Share listings and insights", desc: "Post listings, market insights, and wins to a feed built for real estate professionals." },
+    { Icon: ChartLineUp, title: "Grow with local deal flow", desc: "Discover nearby opportunities on the map and turn connections into closed deals." },
+  ];
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <h2 style={{ fontSize: "clamp(1.3rem, 3.5vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(14px,3vh,28px)", textAlign: "center" }}>
+        Everything you need in one place
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-white/8 md:divide-y-0 md:divide-x">
+        {items.map(({ Icon, title, desc }) => (
+          <div key={title} style={{ padding: "clamp(10px,2vh,20px) clamp(12px,3vw,28px)", textAlign: "center" }}>
+            <div style={{ width: 40, height: 40, background: "transparent", border: "1px solid rgba(129,140,248,0.35)", borderRadius: RADIUS.card, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto clamp(8px,1.5vh,14px)" }}>
+              <Icon size={19} color="#818CF8" weight="regular" />
+            </div>
+            <h3 style={{ fontWeight: 700, fontSize: "0.98rem", margin: "0 0 6px" }}>{title}</h3>
+            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── How It Works panel ───────────────────────────────────────── */
+function HowItWorksPanel() {
+  const steps = [
+    { img: "/Assets/uneditedcommunityscreen.PNG", pos: "10% 8%", title: "Build your profile", desc: "Add your name, brokerage, and specialties so other agents know who they're connecting with." },
+    { img: "/Assets/homefeedunedited.PNG", pos: "50% 15%", title: "Post to the feed", desc: "Share listings, market insights, and wins with your network." },
+    { img: "/Assets/unedited map tab.PNG", pos: "50% 45%", title: "Find deals on the map", desc: "Browse nearby listings and connections, and turn activity into closed deals." },
+  ];
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <h2 style={{ fontSize: "clamp(1.1rem, 2.8vh, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(8px,1.6vh,28px)", textAlign: "center" }}>
+        How Sterling works
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 divide-y divide-white/8 md:divide-y-0 md:divide-x">
+        {steps.map(({ img, pos, title, desc }) => (
+          <div key={title} style={{ padding: "clamp(8px,1.6vh,20px) clamp(12px,3vw,28px)", textAlign: "center" }}>
+            <div
+              className="mx-auto w-32 h-32 md:w-40 md:h-40 lg:w-64 lg:h-80 overflow-hidden"
+              style={{ borderRadius: RADIUS.card, border: "1px solid rgba(129,140,248,0.35)", marginBottom: "clamp(6px,1.2vh,14px)" }}
+            >
+              <img
+                src={img}
+                alt=""
+                aria-hidden="true"
+                draggable={false}
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos, pointerEvents: "none", userSelect: "none" }}
+              />
+            </div>
+            <h3 style={{ fontWeight: 700, fontSize: "0.98rem", margin: "0 0 4px" }}>{title}</h3>
+            <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.5, margin: 0, fontSize: "0.82rem" }}>{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── For Business panel ───────────────────────────────────────── */
+function ForBusinessPanel() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center w-full max-w-4xl mx-auto">
+      <div className="text-center lg:text-left">
+        <h2 style={{ fontSize: "clamp(1.1rem, 2.8vh, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(6px,1.2vh,16px)" }}>
+          Where real estate professionals connect
+        </h2>
+        <p style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.5, fontSize: "clamp(0.72rem,1.9vh,0.85rem)", marginBottom: "clamp(8px,1.5vh,18px)", maxWidth: "48ch", marginLeft: "auto", marginRight: "auto" }}>
+          Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
+        </p>
+        <ul style={{ listStyle: "none", padding: 0, margin: "0 0 clamp(10px,1.5vh,20px)", display: "inline-flex", flexDirection: "column", gap: "clamp(3px,0.8vh,7px)", textAlign: "left" }}>
+          {[
+            "Meet the agents and brokers worth knowing in your market",
+            "Get in front of investors actively looking for their next deal",
+            "Ask real questions and get answers from people who've done it",
+            "Build a reputation and a network that follows your whole career",
+          ].map((line) => (
+            <li key={line} style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "rgba(255,255,255,0.72)", fontSize: "clamp(0.72rem,1.9vh,0.85rem)", lineHeight: 1.4 }}>
+              <span style={{ width: 5, height: 5, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 7, flexShrink: 0 }} />
+              {line}
+            </li>
+          ))}
+        </ul>
+        <div className="flex lg:justify-start justify-center">
+          <StoreButtons />
+        </div>
+      </div>
+
+      <div className="hidden lg:flex" style={{
+        background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+        borderRadius: RADIUS.card, padding: "clamp(24px,4vh,48px) clamp(20px,4vw,40px)",
+        alignItems: "center", justifyContent: "center",
+        position: "relative", overflow: "hidden",
+      }}>
+        <div className="glow-blob" style={{ position: "absolute", bottom: -60, left: -60, width: 200, height: 200, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <Handshake size={56} color="#818CF8" weight="regular" style={{ position: "relative", zIndex: 1 }} />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Page ────────────────────────────────────────────────────── */
+/* ─── Mobile app shell (single viewport, tab-switched) ─────────── */
+function MobileApp() {
+  const [tab, setTab] = useState<TabKey>("overview");
+
+  const navItems: { key: TabKey; label: string }[] = [
+    { key: "features", label: "Features" },
+    { key: "how", label: "How It Works" },
+    { key: "business", label: "For Business" },
+    { key: "faq", label: "FAQ" },
+  ];
+
+  return (
+    <div className="flex flex-col lg:hidden" style={{ height: "100svh", background: "#06061a", color: "#fff", overflow: "hidden" }}>
 
       {/* ── Navbar ── */}
       <header style={{
-        position: "sticky", top: 0, zIndex: 50,
+        flexShrink: 0, position: "relative", zIndex: 50,
         background: "rgba(6,6,26,0.82)", backdropFilter: "blur(18px)",
         borderBottom: "1px solid rgba(255,255,255,0.06)",
       }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+          <Link href="/" onClick={() => setTab("overview")} className="flex items-center gap-2 no-underline">
+            <SterlingLogo size={30} />
+            <span style={{ fontWeight: 700, fontSize: "1rem", color: "#fff" }}>Sterling</span>
+          </Link>
+          <nav className="hidden md:flex items-center gap-6 overflow-x-auto">
+            {navItems.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => setTab(item.key)}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  color: tab === item.key ? "#fff" : "rgba(255,255,255,0.62)",
+                  fontWeight: tab === item.key ? 700 : 400,
+                  textDecoration: "none", fontSize: "0.85rem", transition: "color 0.2s", padding: 0,
+                }}
+              >{item.label}</button>
+            ))}
+          </nav>
+          <a href="#" style={{
+            background: "#3D3CF5", color: "#fff", borderRadius: RADIUS.button,
+            padding: "8px 18px", fontWeight: 600, fontSize: "0.82rem",
+            textDecoration: "none", transition: "background 0.2s, transform 0.15s",
+          }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#322fd4"; (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#3D3CF5"; (e.currentTarget as HTMLElement).style.transform = ""; }}
+          >Download</a>
+        </div>
+        {/* Mobile tab strip */}
+        <div className="flex md:hidden gap-1 overflow-x-auto px-3 pb-1 -mt-1" style={{ WebkitOverflowScrolling: "touch" }}>
+          {navItems.map((item) => (
+            <button
+              key={item.key}
+              type="button"
+              onClick={() => setTab(item.key)}
+              style={{
+                background: "none", border: "none", cursor: "pointer", whiteSpace: "nowrap",
+                color: tab === item.key ? "#fff" : "rgba(255,255,255,0.55)",
+                fontWeight: tab === item.key ? 700 : 400,
+                fontSize: "0.78rem", padding: "8px 7px",
+                WebkitTapHighlightColor: "transparent", touchAction: "manipulation",
+              }}
+            >{item.label}</button>
+          ))}
+        </div>
+      </header>
+
+      {/* ── Content (single viewport, tab-switched) ── */}
+      <main
+        className={`relative flex flex-1 min-h-0 justify-center ${tab === "how" ? "items-start overflow-y-auto overflow-x-hidden overscroll-contain" : "items-center overflow-hidden"}`}
+        style={{
+          padding: "clamp(12px,2.5vh,32px) clamp(16px,4vw,32px)",
+          WebkitOverflowScrolling: tab === "how" ? "touch" : undefined,
+          touchAction: tab === "how" ? "pan-y" : undefined,
+        }}
+      >
+        <div className="glow-blob" style={{ position: "absolute", top: -100, left: -100, width: 450, height: 450, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <div className="glow-blob" style={{ position: "absolute", bottom: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: "radial-gradient(circle, rgba(139,53,236,0.14) 0%, transparent 70%)", pointerEvents: "none", animationDelay: "2s" }} />
+        <div style={{ position: "relative", zIndex: 1, width: "100%" }}>
+          {tab === "overview" && <OverviewPanel />}
+          {tab === "features" && <FeaturesPanel />}
+          {tab === "how" && <HowItWorksPanel />}
+          {tab === "business" && <ForBusinessPanel />}
+          {tab === "faq" && (
+            <div className="w-full max-w-2xl mx-auto">
+              <h2 style={{ fontSize: "clamp(1.3rem, 3.5vw, 1.9rem)", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 clamp(10px,2vh,20px)", textAlign: "center" }}>
+                Frequently asked questions
+              </h2>
+              <FAQAccordion />
+            </div>
+          )}
+        </div>
+      </main>
+
+      {/* ── Footer strip ── */}
+      <footer style={{
+        flexShrink: 0, background: "#06061a", borderTop: "1px solid rgba(255,255,255,0.06)",
+        padding: "10px 16px",
+      }}>
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <SterlingLogo size={20} />
+            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.72rem" }}>© 2026 Sterling</span>
+          </div>
+          <Link href="/privacy" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: "0.72rem" }}>Privacy Policy</Link>
+          <div className="flex gap-2">
+            {[
+              { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
+              { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
+            ].map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
+                width: 26, height: 26, borderRadius: RADIUS.button,
+                background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "rgba(255,255,255,0.58)", textDecoration: "none",
+              }}>
+                <Icon />
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+/* ─── Desktop site (stacked, scrollable) ─────────────────────────── */
+function DesktopApp() {
+  const navItems = [
+    { href: "#features", label: "Features" },
+    { href: "#how-it-works", label: "How It Works" },
+    { href: "#for-business", label: "For Business" },
+    { href: "#faq", label: "FAQ" },
+  ];
+
+  return (
+    <div className="hidden lg:block" style={{ background: "#06061a", color: "#fff" }}>
+
+      {/* ── Navbar ── */}
+      <header className="sticky top-0 z-50" style={{
+        background: "rgba(6,6,26,0.82)", backdropFilter: "blur(18px)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}>
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 no-underline">
             <SterlingLogo size={34} />
             <span style={{ fontWeight: 700, fontSize: "1.12rem", color: "#fff" }}>Sterling</span>
           </Link>
-          <nav className="hidden md:flex items-center gap-8">
-            {["Features", "How It Works", "For Business", "FAQ"].map((item) => (
-              <a key={item} href="#" style={{ color: "rgba(255,255,255,0.68)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}
+          <nav className="flex items-center gap-8">
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} style={{ color: "rgba(255,255,255,0.68)", textDecoration: "none", fontSize: "0.9rem", transition: "color 0.2s" }}
                 onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
                 onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.68)")}
-              >{item}</a>
+              >{item.label}</a>
             ))}
           </nav>
           <a href="#" style={{
-            background: "#3D3CF5", color: "#fff", borderRadius: 10,
+            background: "#3D3CF5", color: "#fff", borderRadius: RADIUS.button,
             padding: "9px 22px", fontWeight: 600, fontSize: "0.9rem",
             textDecoration: "none", transition: "background 0.2s, transform 0.15s",
           }}
@@ -220,188 +518,172 @@ export default function Home() {
       </header>
 
       {/* ── Hero ── */}
-      <section style={{
-        background: "#06061a",
-        position: "relative", padding: "60px 0 0",
-      }}>
-        {/* Ambient blobs */}
+      <section className="relative overflow-hidden" style={{ padding: "100px 0 90px" }}>
         <div className="glow-blob" style={{ position: "absolute", top: -100, left: -100, width: 550, height: 550, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div className="glow-blob" style={{ position: "absolute", top: 80, right: -120, width: 450, height: 450, borderRadius: "50%", background: "radial-gradient(circle, rgba(139,53,236,0.18) 0%, transparent 70%)", pointerEvents: "none", animationDelay: "2s" }} />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6" style={{ position: "relative", zIndex: 1 }}>
-          {/* Badge */}
-          <div className="animate-fade-up-1" style={{ textAlign: "center" }}>
-            <span style={{
-              display: "inline-block", background: "rgba(255,255,255,0.07)",
-              border: "1px solid rgba(255,255,255,0.14)", borderRadius: 100,
-              padding: "6px 18px", fontSize: "clamp(0.75rem, 2.5vw, 0.85rem)", color: "rgba(255,255,255,0.78)", marginBottom: 28,
-            }}>The social network for real estate people</span>
-          </div>
-
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            {/* Copy */}
-            <div className="flex-1 max-w-xl w-full text-center lg:text-left">
-              <h1 className="animate-fade-up-2" style={{
-                fontSize: "clamp(2.5rem, 12vw, 5.5rem)", fontWeight: 800,
-                lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 20px",
-              }}>
+        <div className="max-w-7xl mx-auto px-6 relative" style={{ zIndex: 1 }}>
+          <div className="flex items-center gap-12">
+            <div className="flex-1 max-w-xl">
+              <span style={{
+                display: "inline-block", background: "rgba(255,255,255,0.07)",
+                border: "1px solid rgba(255,255,255,0.14)", borderRadius: RADIUS.pill,
+                padding: "6px 18px", fontSize: "0.85rem", color: "rgba(255,255,255,0.78)", marginBottom: 28,
+              }}>The social network for real estate people</span>
+              <h1 style={{ fontSize: "4rem", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.03em", margin: "0 0 20px" }}>
                 <span style={{ background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                  Connect.<br />Share.<br />Grow.
+                  Connect. Share. Grow.
                 </span>
               </h1>
-              <p className="animate-fade-up-3" style={{ fontSize: "clamp(0.95rem, 3.5vw, 1.1rem)", color: "rgba(255,255,255,0.62)", lineHeight: 1.72, marginBottom: 32, maxWidth: 420, marginLeft: "auto", marginRight: "auto" }}>
-                Join a community built for real estate professionals to connect, share insights, and grow their business.
+              <p style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.62)", lineHeight: 1.7, marginBottom: 32, maxWidth: 420 }}>
+                Sterling is free for every real estate professional to connect, share insights, and grow their business.
               </p>
-              <div className="animate-fade-up-4" style={{ display: "flex", justifyContent: "center" }}>
-                <StoreButtons />
-              </div>
+              <StoreButtons />
             </div>
-
-            {/* iPhone mockups */}
-            <div style={{
-              flex: 1, display: "flex",
-              justifyContent: "center", alignItems: "flex-end",
-              gap: "clamp(6px, 3vw, 20px)",
-              paddingBottom: 0, width: "100%",
-            }}>
-              <div className="phone-left" style={{
-                flexShrink: 0,
-                marginBottom: 50,
-              }}>
-                <div style={{ transform: "scale(0.75)", transformOrigin: "bottom center" }}>
-                  <IPhoneFrame screen={<MapScreen />} animClass="" />
-                </div>
-              </div>
-              <div className="phone-right" style={{
-                flexShrink: 0,
-              }}>
-                <div style={{ transform: "scale(0.75)", transformOrigin: "bottom center" }}>
-                  <IPhoneFrame screen={<FeedScreen />} animClass="" />
-                </div>
-              </div>
+            <div className="flex justify-center items-end gap-4" style={{ flex: 1 }}>
+              <IPhoneFrame screen={<MapScreen />} scale={0.88} />
+              <IPhoneFrame screen={<FeedScreen />} scale={0.88} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ── Features ── */}
-      <section style={{ background: "linear-gradient(180deg,#0d0b2e 0%,#06061a 100%)", padding: "80px 0 100px" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section id="features" style={{ background: "linear-gradient(180deg,#0d0b2e 0%,#06061a 100%)", padding: "110px 0" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
+            Everything you need in one place
+          </h2>
+          <div className="grid grid-cols-3 divide-x divide-white/8">
             {[
-              { Icon: ConnectIcon, title: "Connect", desc: "Build meaningful relationships with top agents and professionals." },
-              { Icon: ShareIcon, title: "Share", desc: "Share listings, insights, and opportunities with your network." },
-              { Icon: GrowIcon, title: "Grow", desc: "Expand your network and grow your real estate business." },
+              { Icon: UsersThree, title: "Connect with agents near you", desc: "Build a professional network with agents, brokers, and specialists working in your market." },
+              { Icon: ShareNetwork, title: "Share listings and insights", desc: "Post listings, market insights, and wins to a feed built for real estate professionals." },
+              { Icon: ChartLineUp, title: "Grow with local deal flow", desc: "Discover nearby opportunities on the map and turn connections into closed deals." },
             ].map(({ Icon, title, desc }) => (
-              <div key={title} style={{
-                background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)",
-                borderRadius: 20, padding: "40px 32px", textAlign: "center",
-                transition: "background 0.25s, transform 0.25s",
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.08)"; (e.currentTarget as HTMLElement).style.transform = "translateY(-6px)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.04)"; (e.currentTarget as HTMLElement).style.transform = ""; }}
-              >
-                <div style={{ width: 64, height: 64, background: "rgba(61,60,245,0.15)", borderRadius: 18, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
-                  <Icon />
+              <div key={title} className="text-center px-10">
+                <div style={{ width: 56, height: 56, background: "transparent", border: "1px solid rgba(129,140,248,0.35)", borderRadius: RADIUS.card, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
+                  <Icon size={26} color="#818CF8" weight="regular" />
                 </div>
-                <h3 style={{ fontWeight: 700, fontSize: "1.3rem", margin: "0 0 12px" }}>{title}</h3>
-                <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.65, margin: 0, fontSize: "0.95rem" }}>{desc}</p>
+                <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
+                <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section style={{ background: "linear-gradient(160deg,#0d0b2e 0%,#1a1060 60%,#0d0b2e 100%)", padding: "90px 24px", textAlign: "center", position: "relative", overflow: "hidden" }}>
-        <div className="glow-blob" style={{ position: "absolute", inset: 0, margin: "auto", width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(61,60,245,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <h2 style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: 16, background: "linear-gradient(135deg,#fff 0%,#c7d2fe 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            Your network. Your success.
+      {/* ── How It Works ── */}
+      <section id="how-it-works" style={{ background: "#06061a", padding: "110px 0" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
+            How Sterling works
           </h2>
-          <p style={{ color: "rgba(255,255,255,0.58)", fontSize: "clamp(0.95rem, 3vw, 1.05rem)", marginBottom: 36 }}>
-            Download Sterling today and join the future of real estate networking.
-          </p>
-          <div style={{ display: "flex", justifyContent: "center" }}><StoreButtons /></div>
+          <div className="grid grid-cols-3 divide-x divide-white/8">
+            {[
+              { img: "/Assets/uneditedcommunityscreen.PNG", pos: "10% 8%", title: "Build your profile", desc: "Add your name, brokerage, and specialties so other agents know who they're connecting with." },
+              { img: "/Assets/homefeedunedited.PNG", pos: "50% 15%", title: "Post to the feed", desc: "Share listings, market insights, and wins with your network." },
+              { img: "/Assets/unedited map tab.PNG", pos: "50% 45%", title: "Find deals on the map", desc: "Browse nearby listings and connections, and turn activity into closed deals." },
+            ].map(({ img, pos, title, desc }) => (
+              <div key={title} className="text-center px-10">
+                <div className="mx-auto overflow-hidden" style={{ width: 220, height: 280, borderRadius: RADIUS.card, border: "1px solid rgba(129,140,248,0.35)", marginBottom: 24 }}>
+                  <img
+                    src={img}
+                    alt=""
+                    aria-hidden="true"
+                    draggable={false}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos, pointerEvents: "none", userSelect: "none" }}
+                  />
+                </div>
+                <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
+                <p style={{ color: "rgba(255,255,255,0.52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── For Business ── */}
+      <section id="for-business" style={{ background: "linear-gradient(180deg,#06061a 0%,#0d0b2e 100%)", padding: "110px 0" }}>
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 20px" }}>
+              Where real estate professionals connect
+            </h2>
+            <p style={{ color: "rgba(255,255,255,0.58)", lineHeight: 1.7, fontSize: "1rem", marginBottom: 28, maxWidth: "52ch" }}>
+              Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
+            </p>
+            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                "Meet the agents and brokers worth knowing in your market",
+                "Get in front of investors actively looking for their next deal",
+                "Ask real questions and get answers from people who've done it",
+                "Build a reputation and a network that follows your whole career",
+              ].map((line) => (
+                <li key={line} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: "rgba(255,255,255,0.72)", fontSize: "1rem" }}>
+                  <span style={{ width: 6, height: 6, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 9, flexShrink: 0 }} />
+                  {line}
+                </li>
+              ))}
+            </ul>
+            <StoreButtons />
+          </div>
+
+          <div style={{
+            background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+            borderRadius: RADIUS.card, padding: "64px 48px",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            position: "relative", overflow: "hidden",
+          }}>
+            <div className="glow-blob" style={{ position: "absolute", bottom: -60, left: -60, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
+            <Handshake size={72} color="#818CF8" weight="regular" style={{ position: "relative", zIndex: 1 }} />
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ── */}
+      <section id="faq" style={{ background: "#0d0b2e", padding: "110px 0" }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px" }}>
+          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 48px", textAlign: "center" }}>
+            Frequently asked questions
+          </h2>
+          <FAQAccordion />
         </div>
       </section>
 
       {/* ── Footer ── */}
-      <footer style={{ background: "#06061a", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "60px 24px 32px" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-12">
-            {/* Brand */}
-            <div className="md:col-span-1 text-center sm:text-left">
-              <div className="flex items-center gap-2.5 mb-4 justify-center sm:justify-start">
-                <SterlingLogo size={32} />
-                <span style={{ fontWeight: 700, fontSize: "1.05rem" }}>Sterling</span>
-              </div>
-              <p style={{ color: "rgba(255,255,255,0.38)", fontSize: "0.875rem", lineHeight: 1.65, maxWidth: 200, margin: "0 auto" }}>
-                The social network for real estate professionals to connect, share, and grow together.
-              </p>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h4 style={{ fontWeight: 600, fontSize: "0.95rem", margin: "0 0 16px" }}>Company</h4>
-              <div className="flex flex-col">
-                {["About Us", "Careers", "Blog", "Press"].map((item) => (
-                  <a key={item} href="#" style={{ color: "rgba(255,255,255,0.42)", textDecoration: "none", fontSize: "0.875rem", lineHeight: "2.2", transition: "color 0.2s" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.42)")}
-                  >{item}</a>
-                ))}
-              </div>
-            </div>
-
-            {/* Support */}
-            <div>
-              <h4 style={{ fontWeight: 600, fontSize: "0.95rem", margin: "0 0 16px" }}>Support</h4>
-              <div className="flex flex-col">
-                {[
-                  { label: "Help Center", href: "#" },
-                  { label: "Contact Us", href: "#" },
-                  { label: "Privacy Policy", href: "/privacy" },
-                  { label: "Terms of Service", href: "#" },
-                ].map(({ label, href }) => (
-                  <a key={label} href={href} style={{ color: "rgba(255,255,255,0.42)", textDecoration: "none", fontSize: "0.875rem", lineHeight: "2.2", transition: "color 0.2s" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.42)")}
-                  >{label}</a>
-                ))}
-              </div>
-            </div>
-
-            {/* Follow — Instagram + X only */}
-            <div>
-              <h4 style={{ fontWeight: 600, fontSize: "0.95rem", margin: "0 0 16px" }}>Follow Us</h4>
-              <div className="flex gap-3">
-                {[
-                  { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
-                  { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
-                ].map(({ Icon, href, label }) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
-                    width: 38, height: 38, borderRadius: 10,
-                    background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    color: "rgba(255,255,255,0.58)", textDecoration: "none",
-                    transition: "background 0.2s, color 0.2s",
-                  }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(61,60,245,0.22)"; (e.currentTarget as HTMLElement).style.color = "#818CF8"; }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.06)"; (e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.58)"; }}
-                  >
-                    <Icon />
-                  </a>
-                ))}
-              </div>
-            </div>
+      <footer style={{ background: "#06061a", borderTop: "1px solid rgba(255,255,255,0.06)", padding: "48px 24px" }}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <SterlingLogo size={28} />
+            <span style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.9rem" }}>© 2026 Sterling</span>
           </div>
-
-          <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: 24, textAlign: "center", color: "rgba(255,255,255,0.28)", fontSize: "0.82rem" }}>
-            © 2026 Sterling. All rights reserved.
+          <Link href="/privacy" style={{ color: "rgba(255,255,255,0.45)", textDecoration: "none", fontSize: "0.9rem" }}>Privacy Policy</Link>
+          <div className="flex gap-3">
+            {[
+              { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
+              { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
+            ].map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
+                width: 38, height: 38, borderRadius: RADIUS.button,
+                background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "rgba(255,255,255,0.58)", textDecoration: "none",
+              }}>
+                <Icon />
+              </a>
+            ))}
           </div>
         </div>
       </footer>
     </div>
+  );
+}
+
+/* ─── Page ────────────────────────────────────────────────────── */
+export default function Home() {
+  return (
+    <>
+      <MobileApp />
+      <DesktopApp />
+    </>
   );
 }

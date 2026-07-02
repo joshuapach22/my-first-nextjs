@@ -5,7 +5,7 @@ import "./globals.css";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
-  title: "Sterling — The Social Network for Real Estate Professionals",
+  title: "Sterling - The Social Network for Real Estate Professionals",
   description:
     "Join Sterling and connect with top agents, share listings and insights, and grow your real estate business.",
 };

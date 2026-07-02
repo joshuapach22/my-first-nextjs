@@ -6,6 +6,15 @@ body {
   overflow-x: hidden;
 }
 
+@media (min-width: 1024px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  #features, #how-it-works, #for-business, #faq {
+    scroll-margin-top: 80px;
+  }
+}
+
 @keyframes float-left {
   0%, 100% { transform: translateY(0px) rotate(-6deg); }
   50%       { transform: translateY(-14px) rotate(-6deg); }
