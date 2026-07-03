@@ -4,10 +4,69 @@ import "./globals.css";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
+const TITLE = "Sterling - Social Network & Networking App for Real Estate Professionals";
+const DESCRIPTION =
+  "Sterling is the social networking app for real estate professionals. Connect with agents, brokers, and investors, share listings and insights, find real estate events on the map, and grow your network. Free for every real estate professional.";
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://sterlinghollow.com/#organization",
+      name: "Sterling Hollow",
+      url: "https://sterlinghollow.com",
+      logo: "https://sterlinghollow.com/icon.png",
+    },
+    {
+      "@type": "MobileApplication",
+      name: "Sterling",
+      applicationCategory: "SocialNetworkingApplication",
+      operatingSystem: "iOS",
+      description: DESCRIPTION,
+      publisher: { "@id": "https://sterlinghollow.com/#organization" },
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+  ],
+};
+
 export const metadata: Metadata = {
-  title: "Sterling - The Social Network for Real Estate Professionals",
-  description:
-    "Join Sterling and connect with top agents, share listings and insights, and grow your real estate business.",
+  metadataBase: new URL("https://sterlinghollow.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  keywords: [
+    "Sterling",
+    "real estate networking app",
+    "social network for real estate agents",
+    "real estate agent networking",
+    "connect with real estate agents",
+    "real estate professional community",
+    "app for real estate agents",
+    "real estate investor networking app",
+  ],
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    siteName: "Sterling",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
@@ -16,6 +75,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable} antialiased`}>
       <body style={{ fontFamily: "var(--font-geist), Arial, sans-serif" }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD).replace(/</g, "\\u003c") }}
+        />
         {children}
       </body>
     </html>

@@ -4,6 +4,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - Sterling",
   description: "Sterling's privacy policy explains how we collect, use, and protect your personal information.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 const EFFECTIVE_DATE = "July 1, 2026";

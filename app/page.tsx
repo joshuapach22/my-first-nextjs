@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import {
   UsersThree,
   ShareNetwork,
@@ -12,6 +13,21 @@ import {
 
 /* ─── Shape system (one radius scale for the whole page) ───────── */
 const RADIUS = { pill: 9999, button: 12, card: 16 };
+
+/* ─── Scroll-reveal (desktop web only, see DesktopApp) ──────────── */
+function Reveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      initial={reduce ? false : { opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 type TabKey = "overview" | "features" | "how" | "business" | "faq";
 
@@ -566,22 +582,26 @@ function DesktopApp() {
       {/* ── Features ── */}
       <section id="features" style={{ background: "linear-gradient(180deg,var(--bg-alt) 0%,var(--bg) 100%)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6">
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
-            Everything you need in one place
-          </h2>
+          <Reveal>
+            <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
+              Everything you need in one place
+            </h2>
+          </Reveal>
           <div className="grid grid-cols-3 divide-x divide-[var(--border-08)]">
             {[
               { Icon: UsersThree, title: "Connect with agents near you", desc: "Build a professional network with agents, brokers, and specialists working in your market." },
               { Icon: ShareNetwork, title: "Share listings and insights", desc: "Post listings, market insights, and wins to a feed built for real estate professionals." },
               { Icon: ChartLineUp, title: "Grow with local deal flow", desc: "Discover nearby opportunities on the map and turn connections into closed deals." },
-            ].map(({ Icon, title, desc }) => (
-              <div key={title} className="text-center px-10">
-                <div style={{ width: 56, height: 56, background: "transparent", border: "1px solid rgba(129,140,248,0.35)", borderRadius: RADIUS.card, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
-                  <Icon size={26} color="#818CF8" weight="regular" />
+            ].map(({ Icon, title, desc }, i) => (
+              <Reveal key={title} delay={i * 0.1}>
+                <div className="text-center px-10">
+                  <div style={{ width: 56, height: 56, background: "transparent", border: "1px solid rgba(129,140,248,0.35)", borderRadius: RADIUS.card, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 24px" }}>
+                    <Icon size={26} color="#818CF8" weight="regular" />
+                  </div>
+                  <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
+                  <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
                 </div>
-                <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
-                <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -590,28 +610,32 @@ function DesktopApp() {
       {/* ── How It Works ── */}
       <section id="how-it-works" style={{ background: "var(--bg)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6">
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
-            How Sterling works
-          </h2>
+          <Reveal>
+            <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 64px", textAlign: "center" }}>
+              How Sterling works
+            </h2>
+          </Reveal>
           <div className="grid grid-cols-3 divide-x divide-[var(--border-08)]">
             {[
               { img: "/Assets/uneditedcommunityscreen.PNG", pos: "10% 8%", title: "Build your profile", desc: "Add your name, brokerage, and specialties so other agents know who they're connecting with." },
               { img: "/Assets/homefeedunedited.PNG", pos: "50% 15%", title: "Post to the feed", desc: "Share listings, market insights, and wins with your network." },
               { img: "/Assets/unedited map tab.PNG", pos: "50% 45%", title: "Find deals on the map", desc: "Browse nearby listings and connections, and turn activity into closed deals." },
-            ].map(({ img, pos, title, desc }) => (
-              <div key={title} className="text-center px-10">
-                <div className="mx-auto overflow-hidden" style={{ width: 220, height: 280, borderRadius: RADIUS.card, border: "1px solid rgba(129,140,248,0.35)", marginBottom: 24 }}>
-                  <img
-                    src={img}
-                    alt=""
-                    aria-hidden="true"
-                    draggable={false}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos, pointerEvents: "none", userSelect: "none" }}
-                  />
+            ].map(({ img, pos, title, desc }, i) => (
+              <Reveal key={title} delay={i * 0.1}>
+                <div className="text-center px-10">
+                  <div className="mx-auto overflow-hidden" style={{ width: 220, height: 280, borderRadius: RADIUS.card, border: "1px solid rgba(129,140,248,0.35)", marginBottom: 24 }}>
+                    <img
+                      src={img}
+                      alt=""
+                      aria-hidden="true"
+                      draggable={false}
+                      style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: pos, pointerEvents: "none", userSelect: "none" }}
+                    />
+                  </div>
+                  <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
+                  <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
                 </div>
-                <h3 style={{ fontWeight: 700, fontSize: "1.25rem", margin: "0 0 12px" }}>{title}</h3>
-                <p style={{ color: "var(--text-52)", lineHeight: 1.7, margin: 0, fontSize: "1rem" }}>{desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -620,48 +644,56 @@ function DesktopApp() {
       {/* ── For Business ── */}
       <section id="for-business" style={{ background: "linear-gradient(180deg,var(--bg) 0%,var(--bg-alt) 100%)", padding: "110px 0" }}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-16 items-center">
-          <div>
-            <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 20px" }}>
-              Where real estate professionals connect
-            </h2>
-            <p style={{ color: "var(--text-58)", lineHeight: 1.7, fontSize: "1rem", marginBottom: 28, maxWidth: "52ch" }}>
-              Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
-            </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
-              {[
-                "Meet the agents and brokers worth knowing in your market",
-                "Get in front of investors actively looking for their next deal",
-                "Ask real questions and get answers from people who've done it",
-                "Build a reputation and a network that follows your whole career",
-              ].map((line) => (
-                <li key={line} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: "var(--text-72)", fontSize: "1rem" }}>
-                  <span style={{ width: 6, height: 6, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 9, flexShrink: 0 }} />
-                  {line}
-                </li>
-              ))}
-            </ul>
-            <StoreButtons />
-          </div>
+          <Reveal>
+            <div>
+              <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 20px" }}>
+                Where real estate professionals connect
+              </h2>
+              <p style={{ color: "var(--text-58)", lineHeight: 1.7, fontSize: "1rem", marginBottom: 28, maxWidth: "52ch" }}>
+                Sterling puts you in front of the people who matter in your market: agents and brokers worth knowing, investors actively looking to buy, and a community that answers real questions no matter where you&apos;re starting from. It&apos;s also where you&apos;ll find what&apos;s happening in your market and create your own events, right on the map.
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: "0 0 32px", display: "flex", flexDirection: "column", gap: 12 }}>
+                {[
+                  "Meet the agents and brokers worth knowing in your market",
+                  "Get in front of investors actively looking for their next deal",
+                  "Ask real questions and get answers from people who've done it",
+                  "Build a reputation and a network that follows your whole career",
+                ].map((line) => (
+                  <li key={line} style={{ display: "flex", gap: 12, alignItems: "flex-start", color: "var(--text-72)", fontSize: "1rem" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: RADIUS.pill, background: "#818CF8", marginTop: 9, flexShrink: 0 }} />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+              <StoreButtons />
+            </div>
+          </Reveal>
 
-          <div style={{
-            background: "var(--card-bg-04)", border: "1px solid var(--border-08)",
-            borderRadius: RADIUS.card, padding: "64px 48px",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            position: "relative", overflow: "hidden",
-          }}>
-            <div className="glow-blob" style={{ position: "absolute", bottom: -60, left: -60, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
-            <Handshake size={72} color="#818CF8" weight="regular" style={{ position: "relative", zIndex: 1 }} />
-          </div>
+          <Reveal delay={0.15}>
+            <div style={{
+              background: "var(--card-bg-04)", border: "1px solid var(--border-08)",
+              borderRadius: RADIUS.card, padding: "64px 48px",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              position: "relative", overflow: "hidden",
+            }}>
+              <div className="glow-blob" style={{ position: "absolute", bottom: -60, left: -60, width: 220, height: 220, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
+              <Handshake size={72} color="#818CF8" weight="regular" style={{ position: "relative", zIndex: 1 }} />
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* ── FAQ ── */}
       <section id="faq" style={{ background: "var(--bg-alt)", padding: "110px 0" }}>
         <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 24px" }}>
-          <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 48px", textAlign: "center" }}>
-            Frequently asked questions
-          </h2>
-          <FAQAccordion />
+          <Reveal>
+            <h2 style={{ fontSize: "2.5rem", fontWeight: 800, letterSpacing: "-0.02em", margin: "0 0 48px", textAlign: "center" }}>
+              Frequently asked questions
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <FAQAccordion />
+          </Reveal>
         </div>
       </section>
 
