@@ -275,10 +275,10 @@ export default function PrivacyPage() {
           <div style={{ background: "var(--card-bg-04)", border: "1px solid var(--border-08)", borderRadius: 16, padding: "20px 24px", marginTop: 8 }}>
             <p style={{ margin: "0 0 8px", fontWeight: 600, color: "var(--text-primary)" }}>Sterling Hollow</p>
             <p style={{ margin: "0 0 6px" }}>
-              Email: <a href="mailto:support@sterlinghollow.com" style={{ color: "#818CF8" }}>support@sterlinghollow.com</a>
+              Email: <a href="mailto:Contact@sterlinghollow.com" style={{ color: "#818CF8" }}>Contact@sterlinghollow.com</a>
             </p>
             <p style={{ margin: 0 }}>
-              Website: <a href="https://sterlinghollow.com" style={{ color: "#818CF8" }}>sterlinghollow.com</a>
+              Website: <a href="https://sterlingtheapp.com" style={{ color: "#818CF8" }}>sterlingtheapp.com</a>
             </p>
           </div>
           <P>

@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://sterlinghollow.com/sitemap.xml",
+    sitemap: "https://sterlingtheapp.com/sitemap.xml",
   };
 }

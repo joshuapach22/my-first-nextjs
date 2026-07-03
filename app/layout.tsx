@@ -13,10 +13,10 @@ const JSON_LD = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://sterlinghollow.com/#organization",
+      "@id": "https://sterlingtheapp.com/#organization",
       name: "Sterling Hollow",
-      url: "https://sterlinghollow.com",
-      logo: "https://sterlinghollow.com/icon.png",
+      url: "https://sterlingtheapp.com",
+      logo: "https://sterlingtheapp.com/icon.png",
     },
     {
       "@type": "MobileApplication",
@@ -24,7 +24,7 @@ const JSON_LD = {
       applicationCategory: "SocialNetworkingApplication",
       operatingSystem: "iOS",
       description: DESCRIPTION,
-      publisher: { "@id": "https://sterlinghollow.com/#organization" },
+      publisher: { "@id": "https://sterlingtheapp.com/#organization" },
       offers: {
         "@type": "Offer",
         price: "0",
@@ -35,7 +35,7 @@ const JSON_LD = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sterlinghollow.com"),
+  metadataBase: new URL("https://sterlingtheapp.com"),
   title: TITLE,
   description: DESCRIPTION,
   alternates: {
