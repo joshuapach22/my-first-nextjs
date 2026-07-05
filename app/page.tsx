@@ -137,26 +137,172 @@ function IPhoneFrame({ screen, scale = 1 }: { screen: React.ReactNode; scale?: n
   );
 }
 
+/* ─── Early Access lead form (GHL-connected) ────────────────────── */
+function EarlyAccessModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  if (!open) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrorMsg("");
+    try {
+      const res = await fetch("/api/early-access", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, phone, consent }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+        return;
+      }
+      setStatus("success");
+    } catch {
+      setErrorMsg("Something went wrong. Please try again.");
+      setStatus("error");
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", padding: "10px 12px", borderRadius: RADIUS.button,
+    border: "1px solid var(--border-14)", background: "var(--card-bg-04)",
+    color: "var(--text-primary)", fontSize: "0.92rem", outline: "none",
+  };
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, zIndex: 1000, background: "rgba(0,0,0,0.55)",
+        display: "flex", alignItems: "center", justifyContent: "center", padding: 16,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          width: "100%", maxWidth: 420, background: "var(--bg-alt)", border: "1px solid var(--border-08)",
+          borderRadius: RADIUS.card, padding: "28px 24px", position: "relative",
+        }}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          style={{ position: "absolute", top: 14, right: 14, background: "none", border: "none", cursor: "pointer", color: "var(--text-52)", fontSize: "1.2rem", lineHeight: 1 }}
+        >
+          ×
+        </button>
+
+        {status === "success" ? (
+          <div style={{ textAlign: "center", padding: "16px 0" }}>
+            <h3 style={{ fontSize: "1.2rem", fontWeight: 800, margin: "0 0 8px", color: "var(--text-primary)" }}>You&apos;re on the list</h3>
+            <p style={{ color: "var(--text-58)", fontSize: "0.9rem", margin: 0 }}>We&apos;ll text you as soon as early access opens up.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <h3 style={{ fontSize: "1.2rem", fontWeight: 800, margin: "0 0 6px", color: "var(--text-primary)" }}>Get early access</h3>
+            <p style={{ color: "var(--text-58)", fontSize: "0.85rem", margin: "0 0 20px" }}>Be first to know when Sterling opens up in your market.</p>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 14 }}>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label style={{ display: "block", fontSize: "0.78rem", color: "var(--text-62)", marginBottom: 6 }}>First name</label>
+                  <input required value={firstName} onChange={(e) => setFirstName(e.target.value)} style={inputStyle} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontSize: "0.78rem", color: "var(--text-62)", marginBottom: 6 }}>Last name</label>
+                  <input required value={lastName} onChange={(e) => setLastName(e.target.value)} style={inputStyle} />
+                </div>
+              </div>
+              <div>
+                <label style={{ display: "block", fontSize: "0.78rem", color: "var(--text-62)", marginBottom: 6 }}>Phone number</label>
+                <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 555-5555" style={inputStyle} />
+              </div>
+            </div>
+
+            <label style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 16, cursor: "pointer" }}>
+              <input
+                required
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                style={{ marginTop: 3, flexShrink: 0 }}
+              />
+              <span style={{ fontSize: "0.76rem", color: "var(--text-52)", lineHeight: 1.5 }}>
+                By checking this box, I consent to receive text messages and calls from Sterling, including automated messages, at the phone number provided. Message and data rates may apply. Message frequency varies. Reply STOP at any time to opt out.
+              </span>
+            </label>
+
+            {status === "error" && (
+              <p style={{ color: "#f87171", fontSize: "0.8rem", margin: "0 0 12px" }}>{errorMsg}</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              style={{
+                width: "100%", background: "#3D3CF5", color: "#fff", border: "none",
+                borderRadius: RADIUS.button, padding: "12px 0", fontWeight: 700, fontSize: "0.92rem",
+                cursor: status === "submitting" ? "default" : "pointer",
+                opacity: status === "submitting" ? 0.7 : 1,
+              }}
+            >
+              {status === "submitting" ? "Submitting..." : "Get Early Access"}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
+
 /* ─── Store buttons ───────────────────────────────────────────── */
 function StoreButtons() {
+  const [showEarlyAccess, setShowEarlyAccess] = useState(false);
+
   return (
-    <div className="flex flex-wrap gap-3 justify-center">
-      <a href="#" style={{
-        display: "inline-flex", alignItems: "center", gap: 9,
-        padding: "9px 18px", background: "#000",
-        border: "1.5px solid rgba(255,255,255,0.16)", borderRadius: RADIUS.button,
-        color: "#fff", textDecoration: "none",
-        transition: "background 0.2s, transform 0.15s",
-      }}
-        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#1a1040"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
-        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#000"; (e.currentTarget as HTMLElement).style.transform = ""; }}
+    <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-wrap gap-3 justify-center">
+        <a href="#" style={{
+          display: "inline-flex", alignItems: "center", gap: 9,
+          padding: "9px 18px", background: "#000",
+          border: "1.5px solid rgba(255,255,255,0.16)", borderRadius: RADIUS.button,
+          color: "#fff", textDecoration: "none",
+          transition: "background 0.2s, transform 0.15s",
+        }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#1a1040"; (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#000"; (e.currentTarget as HTMLElement).style.transform = ""; }}
+        >
+          <AppleIcon />
+          <span>
+            <span style={{ display: "block", fontSize: 8, opacity: 0.65, lineHeight: 1, marginBottom: 2 }}>Download on the</span>
+            <span style={{ fontSize: 13, fontWeight: 600 }}>App Store</span>
+          </span>
+        </a>
+      </div>
+      <button
+        type="button"
+        onClick={() => setShowEarlyAccess(true)}
+        style={{
+          background: "none", border: "1.5px solid #3D3CF5", color: "#818CF8",
+          borderRadius: RADIUS.button, padding: "8px 18px", fontWeight: 700,
+          fontSize: "0.78rem", letterSpacing: "0.02em", cursor: "pointer",
+          transition: "background 0.2s",
+        }}
+        onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(61,60,245,0.1)"; }}
+        onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "none"; }}
       >
-        <AppleIcon />
-        <span>
-          <span style={{ display: "block", fontSize: 8, opacity: 0.65, lineHeight: 1, marginBottom: 2 }}>Download on the</span>
-          <span style={{ fontSize: 13, fontWeight: 600 }}>App Store</span>
-        </span>
-      </a>
+        GET EARLY ACCESS
+      </button>
+      <EarlyAccessModal open={showEarlyAccess} onClose={() => setShowEarlyAccess(false)} />
     </div>
   );
 }
