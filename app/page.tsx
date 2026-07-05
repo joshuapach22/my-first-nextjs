@@ -269,7 +269,7 @@ function StoreButtons() {
   const [showEarlyAccess, setShowEarlyAccess] = useState(false);
 
   return (
-    <div className="flex flex-col items-center gap-3">
+    <div className="flex flex-col items-center lg:items-start gap-3">
       <div className="flex flex-wrap gap-3 justify-center">
         <a href="#" style={{
           display: "inline-flex", alignItems: "center", gap: 9,
@@ -503,9 +503,7 @@ function ForBusinessPanel() {
             </li>
           ))}
         </ul>
-        <div className="flex lg:justify-start justify-center">
-          <StoreButtons />
-        </div>
+        <StoreButtons />
       </div>
 
       <div className="hidden lg:flex" style={{
