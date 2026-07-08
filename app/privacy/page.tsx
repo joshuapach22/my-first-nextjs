@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -64,13 +65,13 @@ export default function PrivacyPage() {
       <header style={{ background: "var(--nav-bg-solid)", borderBottom: "1px solid var(--border-06)", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <div style={{ width: 38, height: 38, borderRadius: 9999, overflow: "hidden", flexShrink: 0 }}>
-              <img
+            <div style={{ width: 38, height: 38, borderRadius: 9999, overflow: "hidden", flexShrink: 0, position: "relative" }}>
+              <Image
                 src="/Assets/Sterling Logo.png"
                 alt="Sterling"
-                width={38}
-                height={38}
-                style={{ width: "100%", height: "100%", objectFit: "cover", transform: "scale(1.18)" }}
+                fill
+                sizes="38px"
+                style={{ objectFit: "cover", transform: "scale(1.18)" }}
               />
             </div>
             <span style={{ fontWeight: 700, fontSize: "1.1rem", color: "var(--text-primary)" }}>Sterling</span>
