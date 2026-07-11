@@ -71,12 +71,26 @@
 :root {
   --heading-gradient-start: #ffffff;
   --heading-gradient-end: #c7d2fe;
+  --journey-glow-1: rgba(61,60,245,0.32);
+  --journey-glow-2: rgba(139,53,236,0.18);
+  --phone-shadow-1: rgba(0,0,0,0.75);
+  --phone-shadow-2: rgba(0,0,0,0.5);
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     --heading-gradient-start: #16143a;
     --heading-gradient-end: #4b46e0;
+    /* Same hue as dark mode, but much lower opacity — at dark-mode strength
+       this glow reads as a dirty gray smudge with a hard edge against the
+       light page background instead of blending into it. */
+    --journey-glow-1: rgba(61,60,245,0.1);
+    --journey-glow-2: rgba(139,53,236,0.06);
+    /* Same story as the journey glow: a shadow this heavy was tuned to
+       vanish into a near-black page background. On light mode it reads
+       as a dark halo with a hard edge instead of a soft drop-shadow. */
+    --phone-shadow-1: rgba(12,12,29,0.22);
+    --phone-shadow-2: rgba(12,12,29,0.14);
   }
 }
 

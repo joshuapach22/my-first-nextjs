@@ -129,8 +129,8 @@ export function IPhoneFrame({ screen, scale = 1 }: { screen: React.ReactNode; sc
         border: "1px solid rgba(255,255,255,0.13)",
         boxShadow: `
           0 0 0 0.5px rgba(255,255,255,0.08),
-          0 ${s(50)}px ${s(120)}px rgba(0,0,0,0.75),
-          0 ${s(20)}px ${s(50)}px rgba(0,0,0,0.5),
+          0 ${s(50)}px ${s(120)}px var(--phone-shadow-1),
+          0 ${s(20)}px ${s(50)}px var(--phone-shadow-2),
           inset 0 1px 0 rgba(255,255,255,0.12),
           inset 0 -1px 0 rgba(255,255,255,0.04)
         `,

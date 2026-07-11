@@ -264,7 +264,7 @@ function DesktopJourney() {
               className="glow-blob"
               style={{
                 position: "absolute", width: 480, height: 480, borderRadius: "50%",
-                background: "radial-gradient(circle, rgba(61,60,245,0.32) 0%, rgba(139,53,236,0.18) 45%, transparent 72%)",
+                background: "radial-gradient(circle, var(--journey-glow-1) 0%, var(--journey-glow-2) 45%, transparent 72%)",
                 pointerEvents: "none", zIndex: 0,
               }}
               animate={{ scale: [1, 1.08, 1] }}
