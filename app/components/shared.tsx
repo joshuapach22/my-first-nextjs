@@ -391,10 +391,10 @@ export function FAQAccordion() {
 
 /* ─── The journey (About page) ──────────────────────────────────── */
 export const JOURNEY_STAGES = [
-  { Icon: RocketLaunch, title: "Show up", desc: "Join in minutes, whether you're brand new or a seasoned pro. Build a profile that shows who you are.", img: "/Assets/uneditedcommunityscreen.PNG", pos: "10% 8%" },
-  { Icon: ChatCircleText, title: "Learn from people who've done it", desc: "Ask real questions in the feed and get real, direct answers from people with real experience.", img: "/Assets/homefeedunedited.PNG", pos: "50% 15%" },
-  { Icon: Trophy, title: "Rank up", desc: "Share the app and earn trophies as you go. The more active you are, the more recognition you build in the community.", img: null as string | null },
-  { Icon: Path, title: "Find your next move", desc: "Discover deals and events on the map, and turn connections into momentum.", img: "/Assets/unedited map tab.PNG", pos: "50% 45%" },
+  { Icon: RocketLaunch, title: "Show up", desc: "Join in minutes, whether you're brand new or a seasoned pro. Build a profile that shows who you are.", img: "/Assets/feed.PNG", pos: "50% 10%" },
+  { Icon: ChatCircleText, title: "Learn from people who've done it", desc: "Ask real questions in the feed and get real, direct answers from people with real experience.", img: "/Assets/community page.PNG", pos: "50% 10%" },
+  { Icon: Trophy, title: "Rank up", desc: "Share the app and earn trophies as you go. The more active you are, the more recognition you build in the community.", img: "/Assets/rank.PNG" as string | null, pos: "50% 10%" },
+  { Icon: Path, title: "Find your next move", desc: "Discover deals and events on the map, and turn connections into momentum.", img: "/Assets/map.PNG", pos: "50% 10%" },
 ];
 
 export function PlaceholderScreen() {
