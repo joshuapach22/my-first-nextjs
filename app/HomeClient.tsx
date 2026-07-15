@@ -9,7 +9,7 @@ function HeroScreenLeft() {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <Image
-        src="/Assets/sterling front.jpg"
+        src="/Assets/rank.PNG"
         alt=""
         aria-hidden="true"
         draggable={false}
