@@ -1,0 +1,322 @@
+
+================================================================================
+                  STERLING — JEFGROWZZ LLC
+                           PRIVACY POLICY
+================================================================================
+
+  Effective Date: July 15, 2026
+  Last Updated:   July 15, 2026
+
+  Website:        sterlingtheapp.com
+  Contact:        contact@sterlinghollow.com
+
+================================================================================
+
+
+  SECTION 1 — INTRODUCTION
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Welcome to Sterling, a mobile platform operated by JEFGROWZZ LLC
+  ("we," "us," or "our") for everyone in real estate — including people
+  studying for their license, active agents, investors, and landlords — to
+  connect, learn, and grow their networks.
+
+  This Privacy Policy explains how we collect, use, disclose, and protect
+  your information when you use the Sterling mobile application
+  (the "App"). Please read this policy carefully. By creating an account
+  or using the App, you acknowledge that you have read and understood this
+  Privacy Policy.
+
+  If you do not agree with any part of this policy, please discontinue
+  use of the App.
+
+
+================================================================================
+
+
+  SECTION 2 — INFORMATION WE COLLECT
+  ─────────────────────────────────────────────────────────────────────────────
+
+  2.1  INFORMATION YOU PROVIDE DIRECTLY
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    Account Registration
+      ▸ Email address
+      ▸ Phone number
+      ▸ Username and password
+
+    Profile
+      ▸ Full name and profile photo (avatar and banner image)
+      ▸ Bio and where you are in your real estate journey (e.g., studying
+        for your license, aspiring investor, first-year agent, part-time
+        in RE, active agent, landlord)
+      ▸ Main focus areas and interest categories selected during onboarding
+      ▸ Date of birth (used to verify eligibility and suggest relevant
+        communities; exact age is not shown on your public profile by default)
+
+    Posts & Community Content
+      ▸ Text, photos, and videos posted to community feeds
+      ▸ Comments, likes, and reactions to other members' content
+      ▸ Location pins, map notes, and property-related attachments
+        shared within posts or messages
+
+    Direct Messages
+      ▸ Content of private conversations, including text,
+        photos, and shared location links
+
+    Map & Location Content
+      ▸ Locations you pin, share, or discuss on the map
+      ▸ Area discussion ratings and notes you submit
+      ▸ Approximate location used to center the map (with permission)
+
+    Events
+      ▸ Event details you create (title, location, date, time, type)
+      ▸ RSVPs and attendee information
+
+    Reports
+      ▸ Content and context submitted when reporting a post or user
+
+
+  2.2  INFORMATION COLLECTED AUTOMATICALLY
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    ▸ Device type, operating system version, and unique device identifiers
+    ▸ App version, screens viewed, features accessed, and interaction
+      timestamps
+    ▸ Notification tokens used to deliver alerts to your device
+    ▸ IP address, crash reports, and performance diagnostics
+
+
+  2.3  INFORMATION COLLECTED WITH YOUR PERMISSION
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    Location
+      ▸ Approximate or precise location, used to center the map
+        around you and display nearby events and discussions.
+        You may revoke this permission at any time in device settings.
+
+    Camera
+      ▸ Access to your device camera when you choose to capture
+        new photos or videos within the App.
+
+    Photo Library
+      ▸ Access to media on your device when you upload photos
+        to posts, profiles, or chat.
+
+    Microphone
+      ▸ Audio access for recording audio content within the App.
+
+
+================================================================================
+
+
+  SECTION 3 — HOW WE USE YOUR INFORMATION
+  ─────────────────────────────────────────────────────────────────────────────
+
+  We use the information we collect to:
+
+    ▸ Create and manage your account and verify your identity
+    ▸ Deliver core App features: feed, communities, events,
+      direct messaging, and maps
+    ▸ Display property and real estate content relevant to your interests
+    ▸ Surface relevant members, communities, and content
+      through search and discovery
+    ▸ Send push notifications about community activity, new messages,
+      event updates, and connection requests
+    ▸ Moderate content and enforce our Community Guidelines
+    ▸ Respond to support requests and resolve disputes
+    ▸ Analyze usage patterns to improve performance and develop
+      new features
+    ▸ Comply with applicable legal obligations
+
+
+================================================================================
+
+
+  SECTION 4 — HOW WE SHARE YOUR INFORMATION
+  ─────────────────────────────────────────────────────────────────────────────
+
+  We do not sell your personal information. We may share information
+  only in the following circumstances:
+
+
+  4.1  WITH OTHER COMMUNITY MEMBERS
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    Content you post publicly — including feed posts, comments, profile
+    details, and connection counts — is visible to other members of your
+    communities. Direct messages are visible only to you and the
+    intended recipient(s). Community owners and moderators may see
+    member activity within communities they manage.
+
+
+  4.2  WITH SERVICE PROVIDERS
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    To operate the App, we engage trusted third-party service providers
+    in the following categories:
+
+      ▸ Cloud infrastructure and database hosting
+      ▸ User authentication and account security
+      ▸ Mapping and location services
+      ▸ Property data and real estate information
+      ▸ Mobile notification delivery
+      ▸ Application performance monitoring
+
+    All service providers are contractually obligated to process your
+    data only as directed by us, maintain appropriate security measures,
+    and are prohibited from using your information for their own
+    independent purposes.
+
+
+  4.3  FOR LEGAL REASONS
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    We may disclose your information if required by law, court order,
+    or governmental authority, or when we reasonably believe disclosure
+    is necessary to protect the rights, property, or safety of
+    Sterling, our users, or the public.
+
+
+  4.4  BUSINESS TRANSFERS
+  · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
+
+    In the event of a merger, acquisition, reorganization, or sale of
+    assets, your information may be transferred as part of that
+    transaction. We will notify you of any such change and the
+    applicable choices you may have.
+
+
+================================================================================
+
+
+  SECTION 5 — DATA RETENTION
+  ─────────────────────────────────────────────────────────────────────────────
+
+  We retain your personal information for as long as your account is
+  active or as needed to provide our services. You may request deletion
+  of your account and associated data at any time by contacting us.
+
+  Please note that some information may be retained for a limited period
+  following account deletion to comply with legal obligations, resolve
+  disputes, or enforce our agreements. Financial and property data you
+  enter is stored solely for your own operational use and is not shared
+  with third parties for their own purposes.
+
+
+================================================================================
+
+
+  SECTION 6 — DATA SECURITY
+  ─────────────────────────────────────────────────────────────────────────────
+
+  We implement industry-standard security measures to protect your
+  information, including:
+
+    ▸ Encrypted data transmission in transit
+    ▸ Secure on-device credential storage
+    ▸ Access controls and authentication on all backend systems
+    ▸ Regular assessments of our data handling practices
+
+  While we take reasonable steps to protect your data, no method of
+  transmission over the internet or electronic storage is 100% secure.
+  We cannot guarantee absolute security and encourage you to use a
+  strong, unique password for your account.
+
+
+================================================================================
+
+
+  SECTION 7 — CHILDREN'S PRIVACY
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Sterling is intended for use by adults and is not directed to
+  children under the age of 13. We do not knowingly collect personal
+  information from children under 13. If you believe we have
+  inadvertently collected information from a child under 13, please
+  contact us immediately and we will take steps to delete the
+  information promptly.
+
+
+================================================================================
+
+
+  SECTION 8 — YOUR RIGHTS AND CHOICES
+  ─────────────────────────────────────────────────────────────────────────────
+
+  Depending on your jurisdiction, you may have the right to:
+
+    Access       Request a copy of the personal information we hold
+                 about you.
+
+    Correct      Request that we correct inaccurate or incomplete
+                 information in your account.
+
+    Delete       Request deletion of your account and associated
+                 personal data.
+
+    Portability  Request a machine-readable export of your data
+                 where technically feasible.
+
+    Opt Out      Opt out of push notifications at any time through
+                 your device notification settings.
+
+    Revoke       Withdraw location, camera, photo library, or
+    Permissions  microphone permissions at any time through your
+                 device settings. Note that revoking certain
+                 permissions may limit App functionality.
+
+  To exercise any of these rights, please contact us using the
+  information provided in Section 11.
+
+
+================================================================================
+
+
+  SECTION 9 — THIRD-PARTY LINKS AND SERVICES
+  ─────────────────────────────────────────────────────────────────────────────
+
+  The App may contain links to third-party websites, listings, or
+  services. We are not responsible for the privacy practices of those
+  third parties. We encourage you to review the privacy policies of any
+  external services you access through the App.
+
+
+================================================================================
+
+
+  SECTION 10 — CHANGES TO THIS PRIVACY POLICY
+  ─────────────────────────────────────────────────────────────────────────────
+
+  We may update this Privacy Policy from time to time to reflect changes
+  in our practices, technology, legal requirements, or other factors.
+  When we make changes, we will:
+
+    ▸ Update the "Last Updated" date at the top of this document
+    ▸ Notify you through the App or via email for material changes
+
+  Your continued use of the App after any update constitutes your
+  acceptance of the revised Privacy Policy. We encourage you to review
+  this policy periodically.
+
+
+================================================================================
+
+
+  SECTION 11 — CONTACT US
+  ─────────────────────────────────────────────────────────────────────────────
+
+  If you have questions, concerns, or requests regarding this Privacy
+  Policy or our data practices, please reach out to us:
+
+    JEFGROWZZ LLC, operator of Sterling
+    Email:    contact@sterlinghollow.com
+    Website:  sterlingtheapp.com
+
+  We will respond to all inquiries within a reasonable timeframe and
+  no later than 30 days of receipt.
+
+
+================================================================================
+                     © 2026 JEFGROWZZ LLC. All rights reserved.
+================================================================================
