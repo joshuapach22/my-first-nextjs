@@ -142,8 +142,8 @@ export function IPhoneFrame({ screen, scale = 1 }: { screen: React.ReactNode; sc
       <div style={{ position: "absolute", inset: s(6), borderRadius: s(45), overflow: "hidden", background: "#000" }}>
         {screen}
         <div style={{
-          position: "absolute", top: s(12), left: "50%", transform: "translateX(-50%)",
-          width: s(118), height: s(34), background: "#000", borderRadius: s(20), zIndex: 30,
+          position: "absolute", top: s(14), left: "50%", transform: "translateX(-50%)",
+          width: s(88), height: s(22), background: "#000", borderRadius: s(14), zIndex: 30,
           boxShadow: "0 0 0 1px rgba(255,255,255,0.06)",
         }} />
       </div>

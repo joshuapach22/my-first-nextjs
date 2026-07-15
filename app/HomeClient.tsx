@@ -1,8 +1,41 @@
 "use client";
 
+import Image from "next/image";
 import { SiteHeader, SiteFooter } from "./components/SiteChrome";
-import { MountReveal, StoreButtons, IPhoneFrame, MapScreen, FeedScreen } from "./components/shared";
+import { MountReveal, StoreButtons, IPhoneFrame } from "./components/shared";
 import { FeaturesSection, JourneySection, CommunitySection, FAQSection } from "./components/sections";
+
+function HeroScreenLeft() {
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+      <Image
+        src="/Assets/sterling front.jpg"
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        fill
+        sizes="300px"
+        style={{ objectFit: "cover", pointerEvents: "none", userSelect: "none" }}
+      />
+    </div>
+  );
+}
+
+function HeroScreenRight() {
+  return (
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
+      <Image
+        src="/Assets/community page.PNG"
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        fill
+        sizes="300px"
+        style={{ objectFit: "cover", pointerEvents: "none", userSelect: "none" }}
+      />
+    </div>
+  );
+}
 
 export default function HomeClient() {
   return (
@@ -43,13 +76,13 @@ export default function HomeClient() {
             <MountReveal delay={0.15}>
               {/* Mobile / tablet */}
               <div className="flex lg:hidden justify-center items-end gap-2 sm:gap-3 w-full" style={{ flex: 1 }}>
-                <div className="phone-left"><IPhoneFrame screen={<MapScreen />} scale={0.47} /></div>
-                <div className="phone-right"><IPhoneFrame screen={<FeedScreen />} scale={0.47} /></div>
+                <div className="phone-left"><IPhoneFrame screen={<HeroScreenLeft />} scale={0.47} /></div>
+                <div className="phone-right"><IPhoneFrame screen={<HeroScreenRight />} scale={0.47} /></div>
               </div>
               {/* Desktop: larger */}
               <div className="hidden lg:flex justify-center items-end gap-4" style={{ flex: 1 }}>
-                <div className="phone-left"><IPhoneFrame screen={<MapScreen />} scale={0.88} /></div>
-                <div className="phone-right"><IPhoneFrame screen={<FeedScreen />} scale={0.88} /></div>
+                <div className="phone-left"><IPhoneFrame screen={<HeroScreenLeft />} scale={0.88} /></div>
+                <div className="phone-right"><IPhoneFrame screen={<HeroScreenRight />} scale={0.88} /></div>
               </div>
             </MountReveal>
           </div>
