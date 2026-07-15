@@ -67,37 +67,52 @@ export function SiteHeader() {
 }
 
 /* ─── Site footer: shared by every page ──────────────────────────── */
+const LEGAL_ITEMS = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Use" },
+  { href: "/guidelines", label: "Community Guidelines" },
+  { href: "/dmca", label: "DMCA Policy" },
+];
+
 export function SiteFooter() {
   return (
     <footer style={{ background: "var(--bg)", borderTop: "1px solid var(--border-06)", padding: "40px 24px" }}>
-      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <div className="flex items-center gap-2.5">
-          <SterlingLogo size={28} />
-          <span style={{ color: "var(--text-4)", fontSize: "0.85rem" }}>© 2026 Sterling</span>
+      <div className="max-w-7xl mx-auto flex flex-col gap-6">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5">
+            <SterlingLogo size={28} />
+            <span style={{ color: "var(--text-4)", fontSize: "0.85rem" }}>© 2026 Sterling</span>
+          </div>
+          <nav className="flex flex-wrap items-center justify-center gap-5">
+            {NAV_ITEMS.map((item) => (
+              <Link key={item.href} href={item.href} style={{ color: "var(--text-45)", textDecoration: "none", fontSize: "0.85rem" }}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex gap-3">
+            {[
+              { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
+              { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
+            ].map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
+                width: 34, height: 34, borderRadius: RADIUS.button,
+                background: "var(--card-bg-06)", border: "1px solid var(--border-08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "var(--text-58)", textDecoration: "none",
+              }}>
+                <Icon />
+              </a>
+            ))}
+          </div>
         </div>
-        <nav className="flex flex-wrap items-center justify-center gap-5">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} style={{ color: "var(--text-45)", textDecoration: "none", fontSize: "0.85rem" }}>
+        <nav className="flex flex-wrap items-center justify-center gap-5" style={{ borderTop: "1px solid var(--border-06)", paddingTop: 20 }}>
+          {LEGAL_ITEMS.map((item) => (
+            <Link key={item.href} href={item.href} style={{ color: "var(--text-28)", textDecoration: "none", fontSize: "0.78rem" }}>
               {item.label}
             </Link>
           ))}
-          <Link href="/privacy" style={{ color: "var(--text-45)", textDecoration: "none", fontSize: "0.85rem" }}>Privacy Policy</Link>
         </nav>
-        <div className="flex gap-3">
-          {[
-            { Icon: InstagramIcon, href: "https://www.instagram.com/sterlingtheapp/?utm_source=ig_web_button_share_sheet", label: "Instagram" },
-            { Icon: XIcon, href: "https://x.com/sterlingtheapp", label: "X (Twitter)" },
-          ].map(({ Icon, href, label }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} style={{
-              width: 34, height: 34, borderRadius: RADIUS.button,
-              background: "var(--card-bg-06)", border: "1px solid var(--border-08)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--text-58)", textDecoration: "none",
-            }}>
-              <Icon />
-            </a>
-          ))}
-        </div>
       </div>
     </footer>
   );
