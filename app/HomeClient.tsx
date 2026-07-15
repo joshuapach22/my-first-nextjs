@@ -25,7 +25,7 @@ function HeroScreenRight() {
   return (
     <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden" }}>
       <Image
-        src="/Assets/community page.PNG"
+        src="/Assets/map.PNG"
         alt=""
         aria-hidden="true"
         draggable={false}
