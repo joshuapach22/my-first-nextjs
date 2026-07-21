@@ -7,7 +7,9 @@ export default function ProductClient() {
   return (
     <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100vh" }}>
       <SiteHeader />
-      <JourneySection as="h1" />
+      <main>
+        <JourneySection as="h1" />
+      </main>
       <SiteFooter />
     </div>
   );

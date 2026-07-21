@@ -14,6 +14,7 @@ function HeroScreenLeft() {
         aria-hidden="true"
         draggable={false}
         fill
+        priority
         sizes="300px"
         style={{ objectFit: "cover", pointerEvents: "none", userSelect: "none" }}
       />
@@ -30,6 +31,7 @@ function HeroScreenRight() {
         aria-hidden="true"
         draggable={false}
         fill
+        priority
         sizes="300px"
         style={{ objectFit: "cover", pointerEvents: "none", userSelect: "none" }}
       />
@@ -42,6 +44,7 @@ export default function HomeClient() {
     <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100vh" }}>
       <SiteHeader />
 
+      <main>
       <section className="relative overflow-hidden" style={{ padding: "clamp(40px,8vh,100px) 0 clamp(50px,9vh,90px)" }}>
         <div className="glow-blob" style={{ position: "absolute", top: -100, left: -100, width: 550, height: 550, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.22) 0%, transparent 70%)", pointerEvents: "none" }} />
         <div className="glow-blob" style={{ position: "absolute", top: 80, right: -120, width: 450, height: 450, borderRadius: "50%", background: "radial-gradient(circle, rgba(139,53,236,0.18) 0%, transparent 70%)", pointerEvents: "none", animationDelay: "2s" }} />
@@ -93,6 +96,7 @@ export default function HomeClient() {
       <JourneySection />
       <CommunitySection />
       <FAQSection />
+      </main>
 
       <SiteFooter />
     </div>

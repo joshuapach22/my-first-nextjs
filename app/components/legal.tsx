@@ -102,7 +102,7 @@ export function LegalPageShell({
       </header>
 
       {/* Content */}
-      <div style={{ maxWidth: 760, margin: "0 auto", padding: "64px 24px 80px" }}>
+      <main style={{ maxWidth: 760, margin: "0 auto", padding: "64px 24px 80px" }}>
 
         {/* Title */}
         <div style={{ marginBottom: 48 }}>
@@ -115,7 +115,7 @@ export function LegalPageShell({
 
         {children}
 
-      </div>
+      </main>
 
       {/* Footer */}
       <div style={{ borderTop: "1px solid var(--border-06)", padding: "24px", textAlign: "center", color: "var(--text-28)", fontSize: "0.82rem" }}>

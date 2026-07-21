@@ -108,6 +108,7 @@ export default function ContactClient() {
     <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100vh" }}>
       <SiteHeader />
 
+      <main>
       <section className="relative overflow-hidden" style={{ padding: "clamp(50px,10vh,110px) 0 clamp(60px,10vh,110px)" }}>
         <div className="glow-blob" style={{ position: "absolute", top: -100, left: -100, width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(61,60,245,0.2) 0%, transparent 70%)", pointerEvents: "none" }} />
 
@@ -181,6 +182,7 @@ export default function ContactClient() {
           </div>
         </div>
       </section>
+      </main>
 
       <SiteFooter />
     </div>
