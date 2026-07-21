@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../lib/seo";
 import { LegalPageShell, Section, SubHeading, P, UL, Group, ContactCard } from "../components/legal";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Privacy Policy - Sterling",
   description: "Sterling's privacy policy explains how we collect, use, and protect your personal information.",
-  alternates: {
-    canonical: "/privacy",
-  },
-};
+  path: "/privacy",
+});
 
 const EFFECTIVE_DATE = "July 15, 2026";
 const LAST_UPDATED = "July 15, 2026";

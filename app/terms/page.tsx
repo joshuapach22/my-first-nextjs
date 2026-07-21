@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../lib/seo";
 import { LegalPageShell, Section, SubHeading, P, UL, ContactCard } from "../components/legal";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Terms of Use - Sterling",
   description: "The Terms of Use governing your access to and use of the Sterling mobile application.",
-  alternates: {
-    canonical: "/terms",
-  },
-};
+  path: "/terms",
+});
 
 const EFFECTIVE_DATE = "July 15, 2026";
 const LAST_UPDATED = "July 15, 2026";

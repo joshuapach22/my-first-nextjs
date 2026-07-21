@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../lib/seo";
 import { LegalPageShell, Section, P, UL, ContactCard } from "../components/legal";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "DMCA / Copyright Infringement Policy - Sterling",
   description: "How copyright owners may notify Sterling of allegedly infringing content, and how users may respond.",
-  alternates: {
-    canonical: "/dmca",
-  },
-};
+  path: "/dmca",
+});
 
 const EFFECTIVE_DATE = "July 15, 2026";
 const LAST_UPDATED = "July 15, 2026";

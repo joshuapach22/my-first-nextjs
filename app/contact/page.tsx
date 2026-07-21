@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../lib/seo";
 import ContactClient from "./ContactClient";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact - Sterling",
   description:
     "Get in touch with Sterling. Sign up for early access, ask a question, or reach out directly at Contact@sterlinghollow.com.",
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return <ContactClient />;

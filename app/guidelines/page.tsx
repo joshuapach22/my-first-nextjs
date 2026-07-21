@@ -1,13 +1,11 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "../lib/seo";
 import { LegalPageShell, Section, P, UL, ContactCard } from "../components/legal";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Community Guidelines - Sterling",
   description: "The Community Guidelines that keep Sterling a safe, respectful, and useful community for everyone in real estate.",
-  alternates: {
-    canonical: "/guidelines",
-  },
-};
+  path: "/guidelines",
+});
 
 const EFFECTIVE_DATE = "July 15, 2026";
 const LAST_UPDATED = "July 15, 2026";
